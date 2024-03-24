@@ -1,0 +1,6 @@
+
+
+
+compRead(plik){
+    
+}
