@@ -1,6 +1,3 @@
 
 
-void Returnmessage(int code){
-    switch(code):
-        case //itd
-}
+void Returnmessage(int code);
