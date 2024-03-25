@@ -4,4 +4,4 @@ typedef struct cell{
 } celltype;
 
 
-StdRead(plik)
+void StdRead(FILE *plik, char *filename, celltype *graf);
