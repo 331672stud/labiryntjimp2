@@ -2,6 +2,6 @@
 
 
 typedef struct polaczenia{
-    int nrpliku; //last-current cell (+/- 1/m)
-    struct komorka *next; //kolejna komorka w ciagu
+    int nrpliku; //do jakiego pliku prowadzi
+    struct komorka *next; //jesli wiecej niz 1
 } filecell;

@@ -16,5 +16,6 @@ int main(int argc, char **argv){
 	FILE *metadane=fopen("metadata.txt","r");
     int ileplikow, szer, wys;
     convRead(ileplikow, szer, wys, filename);
+    writePath(resultname);
 	return 0;
 }

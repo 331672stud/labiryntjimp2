@@ -1,3 +1,4 @@
 
 
 
+void writePath(char *resultname);
