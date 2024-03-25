@@ -1,10 +1,11 @@
-#include <stdio>
-#include <stdlib>
+#include <stdio.h>
+#include <stdlib.h>
 #include "getopt.h"
 #include "compressedReader.h"
 #include "textReader.h"
 #include "graphDivider.h"
-#DEFINE const char *optstring="tn" //t-plik n-jakie maja miec nazwe wynikowe
+#include "adjacencyMatrix."
+#DEFINE optstring "tn" //t-plik n-jakie maja miec nazwe wynikowe
 
 int main(int argc, char **argv){
 	char *filename=malloc(16);
