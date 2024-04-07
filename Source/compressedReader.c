@@ -1,6 +1,6 @@
 
 
 
-compRead(FILE *plik, char *filename, celltype *graf){
+compRead(char *filename, celltype *graf){
     
 }

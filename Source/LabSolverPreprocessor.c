@@ -13,9 +13,9 @@ int main(int argc, char **argv){
 	parsearg(argc, argv, optstring, filename, resultname); //getopt.h (getopt), assigns last two
 	celltype *graf;
 	if(/*filename .bin*/)
-		compRead(plik, filename, graf);
+		compRead(filename, graf);
 	else
-		StdRead(plik, filename, graf);
+		StdRead(filename, graf);
 	divide(graf, resultname);
 	return 0;
 }
