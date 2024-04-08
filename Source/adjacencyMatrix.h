@@ -2,6 +2,6 @@
 
 
 typedef struct cell{
-    int kierunek; //last-current cell (+/- 1/m)
+    int numer; //numer komorki polaczonej
     struct komorka *next; //kolejna komorka w ciagu
 } cell_t; 

@@ -28,11 +28,12 @@ void StdRead(char *filename, cell_t *graf){
     cell_t labirynt[height][width];
     for(int i=0;i<height;i++){
         for(int j=0;j<width;j++){
-            labirynt[i][j].kierunek=-1; //basically NULL
+            labirynt[i][j].numer=i*width+j; //cell number
             labirynt[i][j].next=NULL;
         }
     }//wyzerowana lista
     rewind(plik);
+    cell_t temp{0, NULL};
     for(int i=0;i<posval(height);i++){
         for(int j=0;j<posval(width);j++){
             if(i%2==0)
@@ -40,10 +41,16 @@ void StdRead(char *filename, cell_t *graf){
                     if(bufor[j]!="X")
                         //error
                 else{
-
+                    temp.numer=trueval(i+1)*width+trueval(j);
+                    labirynt[trueval(i-1)][trueval(j)].next=temp;
+                    temp.numer-=width;
+                    labirynt[trueval(i+1)][trueval(j)].next=temp;                    
                 } //up down pass
             else if(j%2==0){
-
+                temp.numer=trueval(i)*width+trueval(j+1);
+                labirynt[trueval(i)][trueval(j-1)].next=temp;
+                temp.numer-=1;
+                labirynt[trueval(i)][trueval(j+1)].next=temp;
             } //left right pass
             else //cell
                 if(bufor[j]!=" ")
