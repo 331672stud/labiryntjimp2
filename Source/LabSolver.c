@@ -7,7 +7,7 @@
 #include "pathSolver.h"
 #include "writer.h"
 #include "adjacencyMatrix.h"
-#define optstring "f:w:" //f-przedrostek plików w-plik wynikowy
+#define optstring ":f:w:h:" //f-przedrostek plików w-plik wynikowy
 
 int main(int argc, char **argv){
 	char *filename=malloc(16);

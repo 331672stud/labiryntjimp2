@@ -1,6 +1,6 @@
-#include "unistd.h"
-#include "stdlib.h"
-#include "stdio.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 
 void parsearg(int argc, char **argv, char *optstring, char **filename, char **resultname){
@@ -21,7 +21,7 @@ void parsearg(int argc, char **argv, char *optstring, char **filename, char **re
                 break;
             default:
                 fprintf(stderr, "Nieznana flaga", argv[0]);
-                exit(EXIT_FAILURE); 
+                return 1; 
         }
     }
 }
