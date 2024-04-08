@@ -11,7 +11,7 @@ int main(int argc, char **argv){
 	char *filename=malloc(16);
 	char *resultname=malloc(16);
 	parsearg(argc, argv, optstring, filename, resultname); //getopt.h (getopt), assigns last two
-	cell_t *graf;
+	graph_t *graf;
 	if(/*filename .bin*/)
 		compRead(filename, graf);
 	else

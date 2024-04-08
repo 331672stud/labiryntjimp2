@@ -1,4 +1,4 @@
 
 
 
-void LocatePath(char *filename, filecell *lista);
+void LocatePath(char *filename, cell_t *lista);

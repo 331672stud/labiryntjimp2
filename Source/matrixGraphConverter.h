@@ -1,4 +1,4 @@
 
 
 
-void conv2graph(celltype *labirynt,celltype *graf);
+void conv2graph(cell_t *labirynt,cell_t *graf);

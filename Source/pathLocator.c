@@ -1,7 +1,7 @@
 
 
 
-void LocatePath(char *filename, filecell *lista){
+void LocatePath(char *filename, cell_t *lista){
     while(lista!=NULL){
         /*ustala sciezke usuwajac niepotrzebne fragmenty listy*/
     }

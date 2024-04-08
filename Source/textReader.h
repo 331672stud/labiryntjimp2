@@ -6,6 +6,6 @@ int trueval(int posval);
 
 int trueval(int posval); 
 
-void StdRead(char *filename, cell_t *graf);
+void StdRead(char *filename, graph_t *graf);
 
 #endif
