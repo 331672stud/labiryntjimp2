@@ -1,6 +1,8 @@
+#ifndef CMPREADER_H
+#define CMPREADER_H
+#include "adjacencyMatrix.h"
 
-
-
-compRead(char *filename, celltype *graf){
+compRead(char *filename, cell_t *graf){
     
 }
+#endif
