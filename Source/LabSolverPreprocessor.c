@@ -6,6 +6,10 @@
 #include "graphDivider.h"
 #include "adjacencyMatrix.h"
 #define optstring ":t:n:" //t-plik n-jakie maja miec nazwe wynikowe
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8d78e1a (getopt)
 
 int main(int argc, char **argv){
 	char *filename=malloc(16);
