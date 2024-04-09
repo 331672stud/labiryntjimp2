@@ -14,7 +14,12 @@ int posval(int trueval){ //wartosc pozycyjna dla calego pliku
     return posval;
 }
 
-void StdRead(char *filename, cell_t *graf){
+char switchcase(int cheight, int cwidth, char *bufor){
+
+
+}
+
+void StdRead(char *filename, graph_t *graf, cell_t **labirynt){
     FILE *plik=fopen(filename, "r");
     //if null return error
     char *bufor=malloc(2050);//2*1024+1 i jeszcze 1 na null albo pokazujący że labirynt jest za duży
@@ -28,7 +33,10 @@ void StdRead(char *filename, cell_t *graf){
         height++;//liczy ile linijek
     //if height()>2049 or height/2!=1 error
     height=trueval(height);
-    cell_t labirynt[height][width];
+    labirynt=malloc(height*sizeof(*char));
+    for(int i=0;i<height;i++){
+        labirynt[i]=malloc(width*sizeof(char));
+    }
     for(int i=0;i<height;i++){
         for(int j=0;j<width;j++){
             labirynt[i][j].numer=i*width+j; //cell number
@@ -39,7 +47,9 @@ void StdRead(char *filename, cell_t *graf){
     cell_t temp{0, NULL};
     for(int i=0;i<posval(height);i++){
         for(int j=0;j<posval(width);j++){
-            if(i%2==0)
+            if(bufor[j]=="P" or bufor[j]=="K")
+                //mark nearest as
+            else if(i%2==0)
                 if(j%2==0) //always a wall
                     if(bufor[j]!="X")
                         //error
@@ -58,9 +68,7 @@ void StdRead(char *filename, cell_t *graf){
             else //cell
                 if(bufor[j]!=" ")
                     //error
-        /*assigns adjacency to labirynt*/
         }
     }
-    conv2graph(labirynt, graf);
-    //done
+    conv2graph(labirynt, graf, width, height);
 }
