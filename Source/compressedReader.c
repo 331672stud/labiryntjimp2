@@ -4,21 +4,26 @@
 #include "valconvert.h"
 
 
-void compRead(char *filename, graph_t *graf){
+void compRead(char *filename, graph_t *graf, cell_t **labirynt){
     
-    FILE *plik = fopen(filename, "r");
+    FILE *plik = fopen(filename, "rb");
      if (plik == NULL) {
         printf("Blad wczytywania pliku.\n");
         return 1;
     }
-
-    char *bufor = malloc(2048 * sizeof(char) + sizeof(NULL));
-    int width = 0;
-    int height = 0;
-
-    while(fgets(bufor, 2050, plik) != NULL){
-
-    }
-
+    
+    int file_id;
+    int escape;
+    int columns;
+    int entry_x;
+    int entry_y;
+    int exit_x;
+    int exit_y;
+    int reserved;
+    int counter;
+    int solution_offset;
+    int separator;
+    int wall;
+    int path;
 
 }
