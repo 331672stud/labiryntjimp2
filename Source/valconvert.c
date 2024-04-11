@@ -1,4 +1,16 @@
+#include <stdio.h>
 
+void errorcom(int code){
+    switch (code)
+    {
+    case 0:
+        fprintf(stdout, "Error 0: Nie udalo sie otworzyc pliku.");
+        break;
+    
+    default:
+        break;
+    }
+}
 
 int trueval(int posval){ //numer komorki
     int trueval=posval-1;

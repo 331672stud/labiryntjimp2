@@ -12,7 +12,10 @@ char switchcase(int cheight, int cwidth, char *bufor){
 
 void StdRead(char *filename, graph_t *graf, cell_t **labirynt){
     FILE *plik=fopen(filename, "r");
-    //if null return error
+    if(plik==NULL){
+        errorcomm(0);
+        return EXIT_FAILURE;
+    }
     char *bufor=malloc(2050);//2*1024+1 i jeszcze 1 na null albo pokazujący że labirynt jest za duży
     //tak samo
     fgets(bufor, 2050, plik);
