@@ -1,11 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "adjacencyMatrix.h"
-
-
-int trueval(int posval) {
-    return (posval - 1) / 2;
-}
+#include "valconvert.h"
 
 
 void compRead(char *filename, graph_t *graf){
