@@ -2,9 +2,7 @@
 #define TXTREADER_H
 #include "adjacencyMatrix.h"
 
-int trueval(int posval);
-
-int trueval(int posval); 
+char switchcase(int cheight, int cwidth, char *bufor);
 
 void StdRead(char *filename, graph_t *graf);
 
