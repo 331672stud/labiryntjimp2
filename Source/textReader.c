@@ -17,17 +17,28 @@ void StdRead(char *filename, graph_t *graf, cell_t **labirynt){
         return EXIT_FAILURE;
     }
     char *bufor=malloc(2050);//2*1024+1 i jeszcze 1 na null albo pokazujący że labirynt jest za duży
-    //tak samo
+    if(bufor==NULL){
+        errorcomm(1);
+        return EXIT_FAILURE;
+    }
     fgets(bufor, 2050, plik);
     int width=strlen(bufor);
-    //if strlen()>2049 or strlen()/2!=1 error
-    width=trueval(width);
+    //to trzeba wsm dac w petle
+    if(width==2050 || width%2==0){
+        errorcomm(2);
+        return EXIT_FAILURE;
+    }
     int height=1;
-    while(fgets(bufor,2050,plik)!=NULL)
+    while(fgets(bufor,2050,plik)!=NULL){
         height++;//liczy ile linijek
-    //if height()>2049 or height/2!=1 error
+        if(width!=strlen(bufor) || height>2049){
+            errorcomm(2);
+            return EXIT_FAILURE;
+        }
+    }
+    width=trueval(width);
     height=trueval(height);
-    labirynt=malloc(height*sizeof(*char));
+    labirynt=malloc(height*sizeof(char*));
     for(int i=0;i<height;i++){
         labirynt[i]=malloc(width*sizeof(char));
     }
