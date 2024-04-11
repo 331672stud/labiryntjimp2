@@ -49,10 +49,10 @@ void StdRead(char *filename, graph_t *graf, cell_t **labirynt){
         }
     }//wyzerowana lista
     rewind(plik);
-    cell_t temp{0, NULL};
+    cell_t temp = {.numer=0, .next=NULL};
     for(int i=0;i<posval(height);i++){
         for(int j=0;j<posval(width);j++){
-            if(bufor[j]=="P" or bufor[j]=="K")
+            if(bufor[j]=="P"|| bufor[j]=="K")
                 //mark nearest as
             else if(i%2==0)
                 if(j%2==0) //always a wall

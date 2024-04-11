@@ -1,7 +1,9 @@
+#include "adjacencyMatrix.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 
-
-void PartWrite(int n, celltype *branch, char *resultname){
+void PartWrite(int n, cell_t *branch, char *resultname){
     char *fileend=malloc(7);
     fileend[0]="_";
     fileend[1]=n+"0";
@@ -12,7 +14,7 @@ void PartWrite(int n, celltype *branch, char *resultname){
     strcat(fullresultname, fileend);
     FILE *zapis=fopen(fullresultname, "w");
     while(branch!=NULL){
-        fprintf();
+        fprintf(zapis,"placeholder" , txttype);
     }
     FILE *metadata=fopen("metadata.txt","w"); //tu zapisujemy metadane o labiryncie: wymiary, ile plikow wynikowych cokolwiek
 }
