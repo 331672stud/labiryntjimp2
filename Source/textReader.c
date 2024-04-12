@@ -3,7 +3,7 @@
 #include "adjacencyMatrix.h"
 #include "valconvert.h"
 
-void StdRead(char *filename, graph_t *graf, cell_t **labirynt){
+void StdRead(char *filename, cell_t **labirynt){
     FILE *plik=fopen(filename, "r");
     if(plik==NULL){
         errorcomm(0);
@@ -94,5 +94,5 @@ void StdRead(char *filename, graph_t *graf, cell_t **labirynt){
                 }
         }
     }
-    conv2graph(labirynt, graf, width, height, numerstart, numerkoniec);
+    conv2graph(labirynt, width, height, numerstart, numerkoniec);
 }

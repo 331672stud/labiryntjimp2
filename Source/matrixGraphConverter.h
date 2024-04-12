@@ -2,10 +2,10 @@
 #define CONVERT_H
 #include "adjacencyMatrix.h"
 
-void usuwaniewagonika(cell_t *wagoniki, int numerwagonika);
+void usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwagonika);
 
-void zalewanielabiryntu(cell_t **labirynt, int width, int height, int start);
+void removecopies(cell_t **labirynt, int width, int height, int start);
 
-void conv2graph(cell_t **labirynt, graph_t *graf, int width, int height, int start, int koniec);
+void conv2graph(cell_t **labirynt, int width, int height, int start, int koniec);
 
 #endif

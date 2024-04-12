@@ -11,12 +11,11 @@ int main(int argc, char **argv){
 	char *filename=malloc(16);
 	char *resultname=malloc(16);
 	parsearg(argc, argv, optstring, filename, resultname); //getopt.h (getopt), assigns last two
-	graph_t *graf;
-	cell_t **labirynt
+	cell_t **labirynt;
 	if(/*filename .bin*/)
-		compRead(filename, graf, labirynt);
+		compRead(filename, labirynt);
 	else
-		StdRead(filename, graf, labirynt);
-	divide(graf, resultname);
+		StdRead(filename, labirynt);
+	divide(labirynt, resultname);
 	return 0;
 }
