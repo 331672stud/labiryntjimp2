@@ -5,7 +5,7 @@
 #include "Errormsg.h"
 
 
-void compRead(char *filename, graph_t *graf, cell_t **labirynt){
+void compRead(char *filename, cell_t **labirynt){
 
     FILE *plik = fopen(filename, "rb");
     if(plik==NULL){
@@ -102,7 +102,7 @@ void compRead(char *filename, graph_t *graf, cell_t **labirynt){
             else if(value!=20){
                     errorcomm(2);
                     return EXIT_FAILURE;
-                }
+                }//zawsze komorka
             current_width++;
             if(current_width==columns){
                 current_height++;

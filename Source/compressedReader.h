@@ -2,6 +2,6 @@
 #define CMPREADER_H
 #include "adjacencyMatrix.h"
 
-void compRead(char *filename, graph_t *graf);
+void compRead(char *filename, cell_t **labirynt);
 
 #endif
