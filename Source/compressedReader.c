@@ -35,16 +35,11 @@ void compRead(char *filename, graph_t *graf, cell_t **labirynt){
     fread(&separator_id, sizeof(separator_id), 1, plik);
     fread(&wall, sizeof(wall), 1, plik);
     fread(&path, sizeof(path), 1, plik);
-    fread(&separator, sizeof(separator), 1, plik);
-    fread(&value, sizeof(value), 1, plik);
-    fread(&count, sizeof(count), 1, plik);
-
-    unsigned char bufor;
 
     int height = trueval(lines);
     labirynt = malloc(height * sizeof(cell_t*));
     if (labirynt == NULL) {
-        errorcomm(1);
+        errorcomm(3);
         return;
     }
     int width = trueval(columns);
@@ -61,9 +56,29 @@ void compRead(char *filename, graph_t *graf, cell_t **labirynt){
             labirynt[i][j].next = NULL;
         }
     }
-    int nrstart
-    int nrkoniec
     
+    int nrstart = (trueval(entry_y - 1) * trueval(columns) + trueval(entry_x)) - 1;
+    int nrkoniec = (trueval(exit_y - 1) * trueval(columns) + trueval(exit_x)) - 1;
+
+    cell_t *temp = malloc(sizeof(cell_t));
+    if (temp == NULL) {
+        errorcomm(3);
+        return;
+    }
+
+    temp->numer = 0;
+    temp->next = NULL;
+
+    int current_height = 0;
+    int current_width = 0;
+
+    while(current_height != lines && current_width != columns){
+        fread(&separator, sizeof(separator_id), 1, plik);
+        fread(&value, sizeof(wall), 1, plik);
+        fread(&count, sizeof(path), 1, plik);
+        
+    }
+
 
 }
 

@@ -13,6 +13,9 @@ void errorcom(int code){
         case 2:
             fprintf(stdout, "Error 2: Labirynt jest w niezgodnym formacie.");
             break;
+        case 3:
+            fprintf(stdout, "Error 2: Blad alokacji pamieci.");
+            break;
         default:
             break;
     }
