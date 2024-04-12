@@ -4,9 +4,9 @@
 #include "valconvert.h"
 
 
-void compRead(char *filename, graph_t *graf, cell_t **labirynt){
+// void compRead(char *filename, graph_t *graf, cell_t **labirynt){
 
-// void test(){
+void test(){
     FILE *plik = fopen("maze.bin", "rb");
     
     unsigned char file_id[4];
@@ -61,7 +61,7 @@ void compRead(char *filename, graph_t *graf, cell_t **labirynt){
     printf("Count: %02X\n", count);
 }
 
-//int main(int argc, char **argv){
-//    test();
-//    return 0;
-//}
+int main(int argc, char **argv){
+    test();
+    return 0;
+}
