@@ -4,10 +4,9 @@
 #include "valconvert.h"
 
 
-// void compRead(char *filename, graph_t *graf, cell_t **labirynt){
+void compRead(char *filename, graph_t *graf, cell_t **labirynt){
 
-void test(){
-    FILE *plik = fopen("maze.bin", "rb");
+    FILE *plik = fopen(filename, "rb");
     
     unsigned char file_id[4];
     unsigned char escape;
@@ -38,30 +37,5 @@ void test(){
 
     fclose(plik);
 
-    printf("File Id: %c%c%c%c\n", file_id[0], file_id[1], file_id[2], file_id[3]);
-    printf("Escape: %02X\n", escape);
-    printf("Columns: %d\n", columns);
-    printf("Lines: %d\n", lines);
-    printf("Entry X: %d\n", entry_x);
-    printf("Entry Y: %d\n", entry_y);
-    printf("Exit X: %d\n", exit_x);
-    printf("Exit Y: %d\n", exit_y);
-    printf("Reserved: ");
-    for (int i = 0; i < sizeof(reserved); i++) {
-        printf("%02X ", reserved[i]);
-    }
-    printf("\n");
-    printf("Counter: %d\n", counter);
-    printf("Solution Offset: %d\n", solution_offset);
-    printf("Separator Id: %02X\n", separator_id);
-    printf("Wall: %02X\n", wall);
-    printf("Path: %02X\n", path);
-    printf("Separator: %02X\n", separator);
-    printf("Value: %02X\n", value);
-    printf("Count: %02X\n", count);
-}
 
-int main(int argc, char **argv){
-    test();
-    return 0;
 }
