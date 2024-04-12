@@ -49,10 +49,20 @@ void StdRead(char *filename, graph_t *graf, cell_t **labirynt){
             fgets(bufor,2050,plik);
             if(bufor[j]=="P" || bufor[j]=="K")
                 if(bufor[j]=="P"){
-                    
+                    if(i==0){
+                        numerstart=trueval(j);
+                    }
+                    else{
+                        numerstart=trueval(i)+1;
+                    }
                 }
                 else{
-
+                    if(i==posval(height)-1){
+                        numerkoniec=trueval(i-1)*width+trueval(j);
+                    }
+                    else{
+                        numerkoniec=trueval(i)*width+trueval(j)-1;
+                    }
                 }
             else if(i%2==0)
                 if(j%2==0) //always a wall
@@ -60,8 +70,7 @@ void StdRead(char *filename, graph_t *graf, cell_t **labirynt){
                         errorcomm(2);
                         return EXIT_FAILURE;
                     }
-                else{
-                    if(bufor[j]==" ")
+                else if(bufor[j]==" "){
                         temp.numer=trueval(i+1)*width+trueval(j);
                         temp.next=labirynt[trueval(i-1)][trueval(j)].next;
                         labirynt[trueval(i-1)][trueval(j)].next=temp;
@@ -83,5 +92,5 @@ void StdRead(char *filename, graph_t *graf, cell_t **labirynt){
                 }
         }
     }
-    conv2graph(labirynt, graf, width, height);
+    conv2graph(labirynt, graf, width, height, numerstart, numerkoniec);
 }
