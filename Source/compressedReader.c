@@ -1,13 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include "adjacencyMatrix.h"
-//#include "valconvert.h"
+#include "adjacencyMatrix.h"
+#include "valconvert.h"
 
-int trueval(int posval){ //numer komorki
-    int trueval=posval-1;
-    trueval/=2;
-    return trueval;
-}
 
 void compRead(char *filename, graph_t *graf, cell_t **labirynt){
 
