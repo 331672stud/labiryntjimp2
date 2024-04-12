@@ -76,6 +76,39 @@ void compRead(char *filename, graph_t *graf, cell_t **labirynt){
         fread(&separator, sizeof(separator_id), 1, plik);
         fread(&value, sizeof(wall), 1, plik);
         fread(&count, sizeof(path), 1, plik);
+        for(int i=0;i<count;i++){
+            if(current_height%2==0)
+                if(current_width%2==0) //always a wall
+                    if(value!=58){
+                        errorcomm(2);
+                        return EXIT_FAILURE;
+                    }
+                else if(value==20){
+                        temp->numer=trueval(current_height+1)*width+trueval(current_width);
+                        temp->next=labirynt[trueval(current_height-1)][trueval(current_width)].next;
+                        labirynt[trueval(current_height-1)][trueval(current_width)].next=temp;
+                        temp->numer-=width;
+                        temp->next=labirynt[trueval(current_height+1)][trueval(current_width)].next;
+                        labirynt[trueval(current_height+1)][trueval(current_width)].next=temp;                    
+                } //up down pass
+            else if(current_width%2==0 && value==20){
+                temp->numer=trueval(current_height)*width+trueval(current_width+1);
+                temp->next=labirynt[trueval(current_height)][trueval(current_width-1)].next;
+                labirynt[trueval(current_height)][trueval(current_width-1)].next=temp;
+                temp->numer-=1;
+                temp->next=labirynt[trueval(current_height)][trueval(current_width+1)].next;
+                labirynt[trueval(current_height)][trueval(current_width+1)].next=temp;
+            } //left right pass
+            else if(value!=20){
+                    errorcomm(2);
+                    return EXIT_FAILURE;
+                }
+            current_width++;
+            if(current_width==columns){
+                current_height++;
+                current_width=0;
+            }    
+        }
         
     }
 

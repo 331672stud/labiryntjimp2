@@ -1,11 +1,10 @@
+#include "adjacencyMatrix.h"
 
-
-
-void divide(celltype *graf, char  *resultname){
+void divide(cell_t **labirynt, char  *resultname){
     int n;//numer pliku
     while(/*graf!=NULL*/){
         //magia
-        celltype *branch; //fragment do zapisu
+        cell_t branch; //fragment do zapisu
         PartWrite(n, branch, resultname);
     }
 }
