@@ -39,22 +39,30 @@ void compRead(char *filename, graph_t *graf, cell_t **labirynt){
     fread(&value, sizeof(value), 1, plik);
     fread(&count, sizeof(count), 1, plik);
 
+    unsigned char bufor;
+
+    int height = trueval(lines);
+    labirynt = malloc(height * sizeof(cell_t*));
+    if (labirynt == NULL) {
+        errorcomm(1);
+        return;
+    }
     int width = trueval(columns);
     if(width == 2050 || width % 2 == 0){
         errorcomm(2);
         return EXIT_FAILURE;
     }
-    int height = trueval(lines);
-    labirynt = malloc(height * sizeof(cell_t*));
     for(int i = 0; i < height; i++){
         labirynt[i] = malloc(width * sizeof(cell_t));
     }
-    for(int i  =0; i < height; i++){
+    for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
             labirynt[i][j].numer = i * width + j;
             labirynt[i][j].next = NULL;
         }
     }
+    int nrstart
+    int nrkoniec
     
 
 }
