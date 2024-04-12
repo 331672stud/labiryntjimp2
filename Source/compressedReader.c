@@ -3,6 +3,11 @@
 //#include "adjacencyMatrix.h"
 //#include "valconvert.h"
 
+int trueval(int posval){ //numer komorki
+    int trueval=posval-1;
+    trueval/=2;
+    return trueval;
+}
 
 void compRead(char *filename, graph_t *graf, cell_t **labirynt){
 
@@ -37,5 +42,19 @@ void compRead(char *filename, graph_t *graf, cell_t **labirynt){
 
     fclose(plik);
 
+    int width = trueval(columns);
+    int height = trueval(lines);
+    labirynt = malloc(height * sizeof(cell_t*));
+    for(int i = 0; i < height; i++){
+        labirynt[i] = malloc(width * sizeof(cell_t));
+    }
+    for(int i  =0; i < height; i++){
+        for(int j = 0; j < width; j++){
+            labirynt[i][j].numer = i * width + j;
+            labirynt[i][j].next = NULL;
+        }
+    }
+    cell_t temp = {.numer = 0, .next = NULL};
 
 }
+
