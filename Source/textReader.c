@@ -3,13 +3,6 @@
 #include "adjacencyMatrix.h"
 #include "valconvert.h"
 
-
-
-char switchcase(int cheight, int cwidth, char *bufor){
-
-
-}
-
 void StdRead(char *filename, graph_t *graf, cell_t **labirynt){
     FILE *plik=fopen(filename, "r");
     if(plik==NULL){
@@ -23,7 +16,6 @@ void StdRead(char *filename, graph_t *graf, cell_t **labirynt){
     }
     fgets(bufor, 2050, plik);
     int width=strlen(bufor);
-    //to trzeba wsm dac w petle
     if(width==2050 || width%2==0){
         errorcomm(2);
         return EXIT_FAILURE;
@@ -38,9 +30,9 @@ void StdRead(char *filename, graph_t *graf, cell_t **labirynt){
     }
     width=trueval(width);
     height=trueval(height);
-    labirynt=malloc(height*sizeof(char*));
+    labirynt=malloc(height*sizeof(cell_t*));
     for(int i=0;i<height;i++){
-        labirynt[i]=malloc(width*sizeof(char));
+        labirynt[i]=malloc(width*sizeof(cell_t));
     }
     for(int i=0;i<height;i++){
         for(int j=0;j<width;j++){
@@ -49,30 +41,46 @@ void StdRead(char *filename, graph_t *graf, cell_t **labirynt){
         }
     }//wyzerowana lista
     rewind(plik);
+    int numerstart;
+    int numerkoniec;
     cell_t temp = {.numer=0, .next=NULL};
     for(int i=0;i<posval(height);i++){
         for(int j=0;j<posval(width);j++){
-            if(bufor[j]=="P"|| bufor[j]=="K")
-                //mark nearest as
+            fgets(bufor,2050,plik);
+            if(bufor[j]=="P" || bufor[j]=="K")
+                if(bufor[j]=="P"){
+                    
+                }
+                else{
+
+                }
             else if(i%2==0)
                 if(j%2==0) //always a wall
-                    if(bufor[j]!="X")
-                        //error
+                    if(bufor[j]!="X"){
+                        errorcomm(2);
+                        return EXIT_FAILURE;
+                    }
                 else{
-                    temp.numer=trueval(i+1)*width+trueval(j);
-                    labirynt[trueval(i-1)][trueval(j)].next=temp;
-                    temp.numer-=width;
-                    labirynt[trueval(i+1)][trueval(j)].next=temp;                    
+                    if(bufor[j]==" ")
+                        temp.numer=trueval(i+1)*width+trueval(j);
+                        temp.next=labirynt[trueval(i-1)][trueval(j)].next;
+                        labirynt[trueval(i-1)][trueval(j)].next=temp;
+                        temp.numer-=width;
+                        temp.next=labirynt[trueval(i+1)][trueval(j)].next;
+                        labirynt[trueval(i+1)][trueval(j)].next=temp;                    
                 } //up down pass
-            else if(j%2==0){
+            else if(j%2==0 && bufor[j]==" "){
                 temp.numer=trueval(i)*width+trueval(j+1);
+                temp.next=labirynt[trueval(i)][trueval(j-1)].next;
                 labirynt[trueval(i)][trueval(j-1)].next=temp;
                 temp.numer-=1;
+                temp.next=labirynt[trueval(i)][trueval(j+1)].next;
                 labirynt[trueval(i)][trueval(j+1)].next=temp;
             } //left right pass
-            else //cell
-                if(bufor[j]!=" ")
-                    //error
+            else if(bufor[j]!=" "){
+                    errorcomm(2);
+                    return EXIT_FAILURE;
+                }
         }
     }
     conv2graph(labirynt, graf, width, height);
