@@ -2,11 +2,16 @@
 #include <stdlib.h>
 #include "adjacencyMatrix.h"
 #include "valconvert.h"
+#include "Errormsg.h"
 
 
 void compRead(char *filename, graph_t *graf, cell_t **labirynt){
 
     FILE *plik = fopen(filename, "rb");
+    if(plik==NULL){
+        errorcomm(0);
+        return EXIT_FAILURE;
+    }
     
     unsigned char file_id[4];
     unsigned char escape;
@@ -34,10 +39,11 @@ void compRead(char *filename, graph_t *graf, cell_t **labirynt){
     fread(&value, sizeof(value), 1, plik);
     fread(&count, sizeof(count), 1, plik);
 
-
-    fclose(plik);
-
     int width = trueval(columns);
+    if(width == 2050 || width % 2 == 0){
+        errorcomm(2);
+        return EXIT_FAILURE;
+    }
     int height = trueval(lines);
     labirynt = malloc(height * sizeof(cell_t*));
     for(int i = 0; i < height; i++){
@@ -49,7 +55,7 @@ void compRead(char *filename, graph_t *graf, cell_t **labirynt){
             labirynt[i][j].next = NULL;
         }
     }
-    cell_t temp = {.numer = 0, .next = NULL};
+    
 
 }
 
