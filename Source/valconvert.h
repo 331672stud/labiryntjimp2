@@ -3,6 +3,6 @@
 
 int trueval(int posval);
 
-int trueval(int posval);
+int posval(int trueval);
 
 #endif

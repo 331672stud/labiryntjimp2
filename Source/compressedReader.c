@@ -1,13 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include "adjacencyMatrix.h"
-//#include "valconvert.h"
+#include "adjacencyMatrix.h"
+#include "valconvert.h"
+#include "Errormsg.h"
 
 
-// void compRead(char *filename, graph_t *graf, cell_t **labirynt){
+void compRead(char *filename, graph_t *graf, cell_t **labirynt){
 
-void test(){
-    FILE *plik = fopen("maze.bin", "rb");
+    FILE *plik = fopen(filename, "rb");
+    if(plik==NULL){
+        errorcomm(0);
+        return EXIT_FAILURE;
+    }
     
     unsigned char file_id[4];
     unsigned char escape;
@@ -31,37 +35,50 @@ void test(){
     fread(&separator_id, sizeof(separator_id), 1, plik);
     fread(&wall, sizeof(wall), 1, plik);
     fread(&path, sizeof(path), 1, plik);
-    fread(&separator, sizeof(separator), 1, plik);
-    fread(&value, sizeof(value), 1, plik);
-    fread(&count, sizeof(count), 1, plik);
 
-
-    fclose(plik);
-
-    printf("File Id: %c%c%c%c\n", file_id[0], file_id[1], file_id[2], file_id[3]);
-    printf("Escape: %02X\n", escape);
-    printf("Columns: %d\n", columns);
-    printf("Lines: %d\n", lines);
-    printf("Entry X: %d\n", entry_x);
-    printf("Entry Y: %d\n", entry_y);
-    printf("Exit X: %d\n", exit_x);
-    printf("Exit Y: %d\n", exit_y);
-    printf("Reserved: ");
-    for (int i = 0; i < sizeof(reserved); i++) {
-        printf("%02X ", reserved[i]);
+    int height = trueval(lines);
+    labirynt = malloc(height * sizeof(cell_t*));
+    if (labirynt == NULL) {
+        errorcomm(3);
+        return;
     }
-    printf("\n");
-    printf("Counter: %d\n", counter);
-    printf("Solution Offset: %d\n", solution_offset);
-    printf("Separator Id: %02X\n", separator_id);
-    printf("Wall: %02X\n", wall);
-    printf("Path: %02X\n", path);
-    printf("Separator: %02X\n", separator);
-    printf("Value: %02X\n", value);
-    printf("Count: %02X\n", count);
+    int width = trueval(columns);
+    if(width == 2050 || width % 2 == 0){
+        errorcomm(2);
+        return EXIT_FAILURE;
+    }
+    for(int i = 0; i < height; i++){
+        labirynt[i] = malloc(width * sizeof(cell_t));
+    }
+    for(int i = 0; i < height; i++){
+        for(int j = 0; j < width; j++){
+            labirynt[i][j].numer = i * width + j;
+            labirynt[i][j].next = NULL;
+        }
+    }
+    
+    int nrstart = (trueval(entry_y - 1) * trueval(columns) + trueval(entry_x)) - 1;
+    int nrkoniec = (trueval(exit_y - 1) * trueval(columns) + trueval(exit_x)) - 1;
+
+    cell_t *temp = malloc(sizeof(cell_t));
+    if (temp == NULL) {
+        errorcomm(3);
+        return;
+    }
+
+    temp->numer = 0;
+    temp->next = NULL;
+
+    int current_height = 0;
+    int current_width = 0;
+
+    while(current_height != lines && current_width != columns){
+        fread(&separator, sizeof(separator_id), 1, plik);
+        fread(&value, sizeof(wall), 1, plik);
+        fread(&count, sizeof(path), 1, plik);
+        
+    }
+
+
 }
 
-int main(int argc, char **argv){
-    test();
-    return 0;
-}

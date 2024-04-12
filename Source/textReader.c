@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "adjacencyMatrix.h"
 #include "valconvert.h"
+#include "Errormsg.h"
 
 void StdRead(char *filename, cell_t **labirynt){
     FILE *plik=fopen(filename, "r");
