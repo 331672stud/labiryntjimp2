@@ -1,13 +1,9 @@
 #ifndef ADJMATRIX_H
 #define ADJMATRIX_H
 
-void compRead(char *filename, graph_t *graf);
-
-
-
 typedef struct cell{
     int numer; //numer komorki polaczonej
-    struct cell next; //kolejna komorka w ciagu
+    struct cell *next; //kolejna komorka w ciagu
 } cell_t; 
 
 typedef struct graph{

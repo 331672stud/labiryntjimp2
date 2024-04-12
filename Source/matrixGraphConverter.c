@@ -1,22 +1,25 @@
 #include "adjacencyMatrix.h"
 #include "valconvert.h"
-
-void zalewanielabiryntu(cell_t **labirynt, graph_t *graf, int komorka, int width, int height){
-    int curheight=komorka/height;
-    int curwidth=komorka%width;
-    cell_t workingcell=labirynt[curheight][curwidth].next;
-    
+#include <stdio.h>
 
 
-    //zaczynajac od startu, zgodnie z komorkami cell_t budowac graph_t
-        //graf skierowany, wiec po dodaniu przejscia z jednej komorki usuwany adres tej na ktorej jestesmy z tej drugiej
-        //jesli wiecej niz jedna alokacja pamieci na wskaznik next
-        //rekurencyjnie poruszac sie po cell_t zgodnie z komorkami ktore dodajemy do graph_t
+void usuwaniewagonika(cell_t *wagoniki, int numerwagonika){
+
 }
 
-void conv2graph(cell_t **labirynt, graph_t *graf, int width, int height){
-    //trzeba dodac zaczynanie od startu nie od 0
-    int komorka; //adres startu
-    zalewanielabiryntu(labirynt, graf, komorka, width, height);
+void zalewanielabiryntu(cell_t **labirynt, int width, int height, int start){
+    int startheight=start/width;
+    int startwidth=start%width;
+    cell_t currentcell=labirynt[startheight][startwidth];
+    cell_t *connections=currentcell.next;
+    while(connections!=NULL){
+        usuwaniewagonika(labirynt[][].next, connections->numer);
+        zalewanielabiryntu(labirynt, width, height, connections->numer);
+        connections=connections->next;
+    }
+}
+
+void conv2graph(cell_t **labirynt, int width, int height, int start, int koniec){
+    removecopies(labirynt, width, height, start);
 }
 
