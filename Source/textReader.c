@@ -43,7 +43,9 @@ void StdRead(char *filename, graph_t *graf, cell_t **labirynt){
     rewind(plik);
     int numerstart;
     int numerkoniec;
-    cell_t temp = {.numer=0, .next=NULL};
+    cell_t *temp = malloc(sizeof(cell_t));
+    temp->numer=0;
+    temp->next=NULL;
     for(int i=0;i<posval(height);i++){
         for(int j=0;j<posval(width);j++){
             fgets(bufor,2050,plik);
@@ -71,19 +73,19 @@ void StdRead(char *filename, graph_t *graf, cell_t **labirynt){
                         return EXIT_FAILURE;
                     }
                 else if(bufor[j]==" "){
-                        temp.numer=trueval(i+1)*width+trueval(j);
-                        temp.next=labirynt[trueval(i-1)][trueval(j)].next;
+                        temp->numer=trueval(i+1)*width+trueval(j);
+                        temp->next=labirynt[trueval(i-1)][trueval(j)].next;
                         labirynt[trueval(i-1)][trueval(j)].next=temp;
-                        temp.numer-=width;
-                        temp.next=labirynt[trueval(i+1)][trueval(j)].next;
+                        temp->numer-=width;
+                        temp->next=labirynt[trueval(i+1)][trueval(j)].next;
                         labirynt[trueval(i+1)][trueval(j)].next=temp;                    
                 } //up down pass
             else if(j%2==0 && bufor[j]==" "){
-                temp.numer=trueval(i)*width+trueval(j+1);
-                temp.next=labirynt[trueval(i)][trueval(j-1)].next;
+                temp->numer=trueval(i)*width+trueval(j+1);
+                temp->next=labirynt[trueval(i)][trueval(j-1)].next;
                 labirynt[trueval(i)][trueval(j-1)].next=temp;
-                temp.numer-=1;
-                temp.next=labirynt[trueval(i)][trueval(j+1)].next;
+                temp->numer-=1;
+                temp->next=labirynt[trueval(i)][trueval(j+1)].next;
                 labirynt[trueval(i)][trueval(j+1)].next=temp;
             } //left right pass
             else if(bufor[j]!=" "){
