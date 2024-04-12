@@ -1,3 +1,1 @@
-
-
-void Returnmessage(int code);
+void errorcom(int code);
