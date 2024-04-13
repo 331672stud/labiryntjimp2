@@ -2,7 +2,7 @@
 #include "valconvert.h"
 #include <stdio.h>
 #include <stdbool.h>
-
+#include "Errormsg.h"
 
 typedef struct Q {
     cell_t* cells; // Kolejka przechowuje instancje struktury komorki

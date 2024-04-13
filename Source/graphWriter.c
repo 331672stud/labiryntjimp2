@@ -1,6 +1,7 @@
 #include "adjacencyMatrix.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "Errormsg.h"
 
 
 void PartWrite(int nr_komorki, int nr_pliku, cell_t *branch, char *resultname){
