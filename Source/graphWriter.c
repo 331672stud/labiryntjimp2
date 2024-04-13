@@ -4,7 +4,7 @@
 #include "Errormsg.h"
 
 
-void PartWrite(int nr_komorki, int nr_pliku, cell_t *branch, char *resultname){
+void PartWrite(int nr_komorki, int nr_pliku, cell_t *branch, char *resultname, int ileplikow){
     
     char *filename = malloc(64); 
     
@@ -20,4 +20,6 @@ void PartWrite(int nr_komorki, int nr_pliku, cell_t *branch, char *resultname){
         fprintf(plik, "%d;", branch->numer);
         branch = branch->next;
     }
+    fprintf(plik, "_%d", ileplikow);
+    fclose(plik);
 }

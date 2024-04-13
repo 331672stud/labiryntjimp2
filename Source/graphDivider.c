@@ -31,13 +31,31 @@ void findbranch(cell_t **labirynt, int width, int height, int start, char *resul
     branch->next=NULL;
     while(branchstarts!=NULL){
         numerkomorki=branchstarts->numer;
-        while(labirynt[numerkomorki/width][numerkomorki%width].next->next==NULL){
-            append(&branch, numerkomorki);
-            numerkomorki=labirynt[numerkomorki/width][numerkomorki%width].next->numer;
+        while(labirynt[numerkomorki/width][numerkomorki%width].next!=NULL){
+            if(labirynt[numerkomorki/width][numerkomorki%width].next->next==NULL){
+                append(&branch, numerkomorki);
+                numerkomorki=labirynt[numerkomorki/width][numerkomorki%width].next->numer;
+                }
+                else{
+                    append(&branch, numerkomorki);
+                    break;
+                }
         }
-        PartWrite(branch->numer, numerpliku, branch, resultname);
-            /*dopisz labirynt.next na koniec listy*/
+        if(labirynt[numerkomorki/width][numerkomorki%width].next==NULL){
+            append(&branch, numerkomorki);
+            PartWrite(branch->numer, numerpliku, branch, resultname, 0);  
+        }
+        else{
+            int ileplikow=0;
+            cell_t *temp=labirynt[numerkomorki/width][numerkomorki%width].next;
+            while(temp!=NULL){
+                ileplikow++;
+                temp=temp->next;
+            }
+            PartWrite(branch->numer, numerpliku, branch, resultname, ileplikow); 
+        } 
         numerpliku++;
+        findbranch(labirynt, width, height, labirynt[numerkomorki/width][numerkomorki%width].numer, resultname);
         branchstarts=branchstarts->next;
     }
 }

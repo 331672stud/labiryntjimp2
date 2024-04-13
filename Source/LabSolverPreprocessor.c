@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "getopt.h"
 #include "compressedReader.h"
 #include "textReader.h"
@@ -12,7 +13,7 @@ int main(int argc, char **argv){
 	char *resultname=malloc(16);
 	parsearg(argc, argv, optstring, filename, resultname); //getopt.h (getopt), assigns last two
 	cell_t **labirynt;
-	if(/*filename .bin*/)
+	if(strstr(filename, ".bin")!=NULL)
 		compRead(filename, labirynt);
 	else
 		StdRead(filename, labirynt);
