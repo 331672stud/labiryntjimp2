@@ -45,7 +45,7 @@ bool isQueueEmpty(PriorityQueue* queue) {
 // Sprawdza czy dana komorka jest dodana do kolejki
 bool isInQueue(PriorityQueue* queue, cell_t cell) {
     for (int i = 0; i < queue->size; i++) {
-        if (queue->cells[i].i == cell.i && queue->cells[i].j == cell.j) {
+        if (queue->cells[i].numer == cell.numer) {
             return true;
         }
     }
@@ -55,17 +55,14 @@ bool isInQueue(PriorityQueue* queue, cell_t cell) {
 // Zmienia wartosc priorytetu danej komorki
 void updatePriority(PriorityQueue* queue, cell_t cell, int newPriority) {
     for (int i = 0; i < queue->size; i++) {
-        if (queue->cells[i].i == cell.i && queue->cells[i].j == cell.j) {
+        if (queue->cells[i].numer == cell.numer) {
             queue->priorities[i] = newPriority;
             break;
         }
     }
 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 95b965c00b764086d62994bb9ff38a6997dbfef6
 void usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwagonika){
     cell_t *curwagon=labirynt[komorkah][komorkaw].next;
     cell_t *replacewagon=NULL;
