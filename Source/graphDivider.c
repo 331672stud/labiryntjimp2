@@ -1,4 +1,6 @@
 #include "adjacencyMatrix.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 void usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwagonika){
     cell_t *curwagon=labirynt[komorkah][komorkaw].next;
@@ -19,14 +21,13 @@ void findbranch(cell_t **labirynt, int width, int height, int start){
     int startheight=start/width;
     int startwidth=start%width;
     cell_t branch=labirynt[startheight][startwidth];
-    cell_t *currentcell.next;
-    while(connections!=NULL){
-        usuwaniewagonika(labirynt, connections->numer/width, connections->numer%width, start);
-        removecopies(labirynt, width, height, connections->numer);
-        connections=connections->next;
+    cell_t *branchstarts=branch.next;
+    cell_t *tempbranch;
+    while(branchstarts!=NULL){
+        branchstarts=branchstarts->next;
     }
 }
 
-void divide(cell_t **labirynt, char  *resultname, int height, int width, int pocz, int kon){
+void divide(cell_t **labirynt, char  *resultname, int height, int width, int pocz){
     findbranch(labirynt, width, height, pocz);
 }
