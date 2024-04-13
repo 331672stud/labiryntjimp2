@@ -1,22 +1,17 @@
 #include "adjacencyMatrix.h"
 #include "valconvert.h"
 #include <stdio.h>
+#include <stdbool.h>
 
-<<<<<<< HEAD
-=======
+
 typedef struct PriorityQueue {
-    Cell* cells; // Kolejka przechowuje instancje struktury komorkiei
+    cell_t* cells; // Kolejka przechowuje instancje struktury komorkiei
     float* priorities; // Priorytety komorek labiryntu, zalezne od wagi w danej komorce
     int size; // Liczba komorek w kolejce 
-    int maxSize;
 } PriorityQueue;
 
 // Dodaje komorke wraz z jej waga (jako priorytet) do kolejki
-void enqueue(PriorityQueue* queue, Cell cell, int priority) {
-    if (queue->size == queue->maxSize) {
-        printf("Przepelnienie kolejki\n");
-        exit(1);
-    }
+void enqueue(PriorityQueue* queue, cell_t cell, int priority) {
     int i;
     // Znajdowanie odpowiedniej pozycji dla komorki w kolejce wg. jej priorytetu
     // Ustawia priorytety komorek wg. zmiennej totalWeight rosnaco
@@ -32,7 +27,7 @@ void enqueue(PriorityQueue* queue, Cell cell, int priority) {
 }
 
 // Usuwa komorke o najwiekszej calkowitej wadze z konca kolejki
-Cell dequeue(PriorityQueue* queue) {
+cell_t dequeue(PriorityQueue* queue) {
     if (queue->size == 0) {
         printf("Zbyt malo elementow w kolejce\n");
         exit(1);
@@ -48,7 +43,7 @@ bool isQueueEmpty(PriorityQueue* queue) {
 }
 
 // Sprawdza czy dana komorka jest dodana do kolejki
-bool isInQueue(PriorityQueue* queue, Cell cell) {
+bool isInQueue(PriorityQueue* queue, cell_t cell) {
     for (int i = 0; i < queue->size; i++) {
         if (queue->cells[i].i == cell.i && queue->cells[i].j == cell.j) {
             return true;
@@ -58,7 +53,7 @@ bool isInQueue(PriorityQueue* queue, Cell cell) {
 }
 
 // Zmienia wartosc priorytetu danej komorki
-void updatePriority(PriorityQueue* queue, Cell cell, int newPriority) {
+void updatePriority(PriorityQueue* queue, cell_t cell, int newPriority) {
     for (int i = 0; i < queue->size; i++) {
         if (queue->cells[i].i == cell.i && queue->cells[i].j == cell.j) {
             queue->priorities[i] = newPriority;
@@ -67,7 +62,7 @@ void updatePriority(PriorityQueue* queue, Cell cell, int newPriority) {
     }
 }
 
->>>>>>> 67f8c9e60fcbfe99a424227884fbb866622b1e9b
+
 void usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwagonika){
     cell_t *curwagon=labirynt[komorkah][komorkaw].next;
     cell_t *replacewagon=NULL;
