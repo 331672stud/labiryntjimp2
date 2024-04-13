@@ -61,6 +61,11 @@ void freeQueue(Q* queue) {
     free(queue);
 }
 
+typedef struct visited{
+    int numer; //numer komorki polaczonej
+    struct cell *next; //kolejna komorka w ciagu
+} v;
+
 
 void usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwagonika){
     cell_t *curwagon=labirynt[komorkah][komorkaw].next;
@@ -77,15 +82,25 @@ void usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwa
     labirynt[komorkah][komorkaw].next=replacewagon;
 }
 
-void removecopies(cell_t **labirynt, int width, int height, int start){
-    int startheight=start/width;
-    int startwidth=start%width;
-    cell_t currentcell=labirynt[startheight][startwidth];
-    cell_t *connections=currentcell.next;
-    while(connections!=NULL){
-        usuwaniewagonika(labirynt, connections->numer/width, connections->numer%width, start);
-        removecopies(labirynt, width, height, connections->numer);
-        connections=connections->next;
+void removecopies(cell_t **labirynt, int width, int height, int start, Q* queue, v* visited){
+    // int startheight=start/width;
+    // int startwidth=start%width;
+    // cell_t currentcell=labirynt[startheight][startwidth];
+    // cell_t *connections=currentcell.next;
+    // while(connections!=NULL){
+    //     usuwaniewagonika(labirynt, connections->numer/width, connections->numer%width, start);
+    //     removecopies(labirynt, width, height, connections->numer);
+    //     connections=connections->next;
+    // }
+
+    enqueue(&queue, labirynt[start / width][start % width]);
+
+    while(!isQueueEmpty(&queue)){
+        cell_t currentCell = dequeue(queue);
+
+        if(!isInQueue(queue, currentCell) && !isInQueue(visited, currentCell)){
+            
+        }
     }
 }
 
