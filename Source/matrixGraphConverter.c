@@ -2,8 +2,6 @@
 #include "valconvert.h"
 #include <stdio.h>
 
-<<<<<<< HEAD
-=======
 typedef struct PriorityQueue {
     Cell* cells; // Kolejka przechowuje instancje struktury komorkiei
     float* priorities; // Priorytety komorek labiryntu, zalezne od wagi w danej komorce
@@ -67,7 +65,6 @@ void updatePriority(PriorityQueue* queue, Cell cell, int newPriority) {
     }
 }
 
->>>>>>> 67f8c9e60fcbfe99a424227884fbb866622b1e9b
 void usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwagonika){
     cell_t *curwagon=labirynt[komorkah][komorkaw].next;
     cell_t *replacewagon=NULL;

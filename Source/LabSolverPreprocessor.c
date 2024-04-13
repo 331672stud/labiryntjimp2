@@ -19,6 +19,16 @@ int main(int argc, char **argv){
 	int height, width, pocz, kon;
 	FILE *metadata=fopen("metadata.txt", "r");
 	fscanf(metadata, "%d %d %d %d", height, width, pocz, kon);
+	fclose(metadata);
+	metadata=fopen("metadata.txt", "a");
+	int firstcount=0;
+	cell_t *temp=labirynt[pocz/width][pocz%width].next;
+	while(temp!=NULL){
+		firstcount++;
+		temp=temp->next;
+	}
+	fprintf(metadata, " %d", firstcount) //ile resultname0_ .txt
+	fclose(metadata);
 	divide(labirynt, resultname, height, width, pocz, kon);
 	return 0;
 }
