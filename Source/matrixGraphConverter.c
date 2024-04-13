@@ -4,11 +4,24 @@
 #include <stdbool.h>
 
 
-typedef struct PriorityQueue {
-    cell_t* cells; // Kolejka przechowuje instancje struktury komorkiei
-    int* priorities; // Priorytety komorek labiryntu, zalezne od wagi w danej komorce
+typedef struct Q {
+    cell_t* cells; // Kolejka przechowuje instancje struktury komorki
     int size; // Liczba komorek w kolejce 
-} PriorityQueue;
+    int maxSize;
+} Q;
+
+Q initQ(int height, int width){
+    Q queue; 
+    queue.cells = malloc(height * width *sizeof(cell_t));
+    if (queue.cells == NULL) {
+        errorcomm(3);
+        return;
+    }
+    queue.size = 0;
+    queue.maxSize = height * width;
+
+    return queue;
+}
 
 // Dodaje komorke wraz z jej waga (jako priorytet) do kolejki
 void enqueue(PriorityQueue* queue, cell_t cell, int priority) {
