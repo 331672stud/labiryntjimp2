@@ -1,4 +1,4 @@
 #include "adjacencyMatrix.h"
 
 
-void PartWrite(int n, cell_t *branch, char *resultname);
+void PartWrite(int nr_komorki, int nr_pliku, cell_t *branch, char *resultname);

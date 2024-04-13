@@ -16,7 +16,7 @@ void PartWrite(int nr_komorki, int nr_pliku, cell_t *branch, char *resultname){
     }
     
     while(branch!=NULL){
-        fprintf(plik, "%d", branch->numer);
+        fprintf(plik, "%d;", branch->numer);
         branch = branch->next;
     }
 }
