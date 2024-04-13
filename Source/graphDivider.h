@@ -2,6 +2,8 @@
 #define DIVIDE_H
 #include "adjacencyMatrix.h"
 
+void findbranch(cell_t **labirynt, int width, int height, int start);
+
 void divide(cell_t **labirynt, char *resultname, int height, int width, int pocz);
 
 #endif

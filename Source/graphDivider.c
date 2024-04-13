@@ -2,20 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwagonika){
-    cell_t *curwagon=labirynt[komorkah][komorkaw].next;
-    cell_t *replacewagon=NULL;
-    cell_t *tempwagon=NULL;
-    while (curwagon!=NULL)
-    {
-        if(curwagon->numer!=numerwagonika){
-            tempwagon=curwagon;
-            tempwagon->next=replacewagon;
-            replacewagon=tempwagon;
-        }
-    }
-    labirynt[komorkah][komorkaw].next=replacewagon;
-}
+cell_t push()
 
 void findbranch(cell_t **labirynt, int width, int height, int start){
     int startheight=start/width;
@@ -30,8 +17,10 @@ void findbranch(cell_t **labirynt, int width, int height, int start){
         currentcell=branchstarts;
         currentcell->next=NULL;
         nextbranch=currentcell;
-        while(labirynt[currentcell->numer/width][currentcell->numer%width].next->next==NULL)
-            
+        while(labirynt[currentcell->numer/width][currentcell->numer%width].next->next==NULL){
+            tempbranch=labirynt[currentcell->numer/width][currentcell->numer%width].next;
+            currentcell->next=tempbranch;
+        }
             /*dopisz labirynt.next na koniec listy*/
         branchstarts=branchstarts->next;
     }
