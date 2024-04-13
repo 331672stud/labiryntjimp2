@@ -3,17 +3,20 @@
 #include <stdlib.h>
 
 
-void PartWrite(int n, cell_t *branch, char *resultname){
-    char *fileend=malloc(7);
-    fileend[0]="_";
-    fileend[1]=n+"0";
-    char *txttype=".txt";
-    strcat(fileend, txttype);
-    char fullresultname=malloc(32);
-    fullresultname=resultname;
-    strcat(fullresultname, fileend);
-    FILE *zapis=fopen(fullresultname, "w");
+void PartWrite(int nr_komorki, int nr_pliku, cell_t *branch, char *resultname){
+    
+    char *filename = malloc(64); 
+    
+    snprintf(filename, 64, "%s%d_%d.txt", resultname, nr_komorki, nr_pliku);
+
+    FILE *plik = fopen(filename, "w");
+    if (plik == NULL) {
+        errorcomm(0);
+        return;
+    }
+    
     while(branch!=NULL){
-        fprintf(zapis,"placeholder" , txttype);
+        fprintf(plik, "%d", branch->numer);
+        branch = branch->next;
     }
 }
