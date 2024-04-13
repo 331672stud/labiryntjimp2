@@ -16,5 +16,4 @@ void PartWrite(int n, cell_t *branch, char *resultname){
     while(branch!=NULL){
         fprintf(zapis,"placeholder" , txttype);
     }
-    FILE *metadata=fopen("metadata.txt","w"); //tu zapisujemy metadane o labiryncie: wymiary, ile plikow wynikowych cokolwiek
 }
