@@ -6,7 +6,7 @@
 
 typedef struct PriorityQueue {
     cell_t* cells; // Kolejka przechowuje instancje struktury komorkiei
-    float* priorities; // Priorytety komorek labiryntu, zalezne od wagi w danej komorce
+    int* priorities; // Priorytety komorek labiryntu, zalezne od wagi w danej komorce
     int size; // Liczba komorek w kolejce 
 } PriorityQueue;
 
