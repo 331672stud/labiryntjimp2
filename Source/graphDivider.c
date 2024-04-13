@@ -23,7 +23,12 @@ void findbranch(cell_t **labirynt, int width, int height, int start){
     cell_t branch=labirynt[startheight][startwidth];
     cell_t *branchstarts=branch.next;
     cell_t *tempbranch;
+    cell_t *currentcell;
+    cell_t copybranch;
     while(branchstarts!=NULL){
+        currentcell=branchstarts;
+        currentcell->next=NULL;
+        while()
         branchstarts=branchstarts->next;
     }
 }

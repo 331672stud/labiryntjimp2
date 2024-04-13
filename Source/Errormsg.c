@@ -16,6 +16,8 @@ void errorcom(int code){
         case 3:
             fprintf(stdout, "Error 2: Blad alokacji pamieci.");
             break;
+        case 4:
+            fprintf(stdout, "Error 4: Kolejka jest pusta gdy próbujemy usunąć element");
         default:
             break;
     }
