@@ -2,7 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-cell_t push()
+void append( cell_t branch){
+
+
+}
 
 void findbranch(cell_t **labirynt, int width, int height, int start){
     int startheight=start/width;
