@@ -23,40 +23,31 @@ Q initQ(int height, int width){
     return queue;
 }
 
-// Dodaje komorke wraz z jej waga (jako priorytet) do kolejki
-void enqueue(PriorityQueue* queue, cell_t cell, int priority) {
-    int i;
-    // Znajdowanie odpowiedniej pozycji dla komorki w kolejce wg. jej priorytetu
-    // Ustawia priorytety komorek wg. zmiennej totalWeight rosnaco
-    for (i = queue->size; i > 0 && queue->priorities[i - 1] > priority; i--) {
-        queue->cells[i] = queue->cells[i - 1];
-        queue->priorities[i] = queue->priorities[i - 1];
-    }
-
-    // Wstawienie komorki do kolejki
-    queue->cells[i] = cell;
-    queue->priorities[i] = priority;
-    queue->size++;
+void enqueue(Q* queue, cell_t cell) {
+    queue->cells[queue->size++] = cell;
 }
 
 // Usuwa komorke o najwiekszej calkowitej wadze z konca kolejki
-cell_t dequeue(PriorityQueue* queue) {
+cell_t dequeue(Q* queue) {
     if (queue->size == 0) {
-        printf("Zbyt malo elementow w kolejce\n");
-        exit(1);
+        errorcomm(4);
+        return;
     }
-    // Zmniejsza rozmiar kolejki o jedna komorke
-    // Zwraca wartosc ostatniej komorki
-    return queue->cells[--queue->size];
+    cell_t cell = queue->cells[0];
+    for (int i = 0; i < queue->size - 1; i++) {
+        queue->cells[i] = queue->cells[i + 1];
+    }
+    queue->size--;
+    return cell;
 }
 
 // Sprawdza czy kolejka jest pusta
-bool isQueueEmpty(PriorityQueue* queue) {
+bool isQueueEmpty(Q* queue) {
     return queue->size == 0;
 }
 
 // Sprawdza czy dana komorka jest dodana do kolejki
-bool isInQueue(PriorityQueue* queue, cell_t cell) {
+bool isInQueue(Q* queue, cell_t cell) {
     for (int i = 0; i < queue->size; i++) {
         if (queue->cells[i].numer == cell.numer) {
             return true;
@@ -65,14 +56,9 @@ bool isInQueue(PriorityQueue* queue, cell_t cell) {
     return false;
 }
 
-// Zmienia wartosc priorytetu danej komorki
-void updatePriority(PriorityQueue* queue, cell_t cell, int newPriority) {
-    for (int i = 0; i < queue->size; i++) {
-        if (queue->cells[i].numer == cell.numer) {
-            queue->priorities[i] = newPriority;
-            break;
-        }
-    }
+void freeQueue(Q* queue) {
+    free(queue->cells);
+    free(queue);
 }
 
 
