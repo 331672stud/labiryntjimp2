@@ -6,6 +6,6 @@ void usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwa
 
 void removecopies(cell_t **labirynt, int width, int height, int start);
 
-void conv2graph(cell_t **labirynt, int width, int height, int start, int koniec);
+void conv2graph(cell_t **labirynt, int width, int height, int start);
 
 #endif

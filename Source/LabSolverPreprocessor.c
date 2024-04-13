@@ -16,6 +16,9 @@ int main(int argc, char **argv){
 		compRead(filename, labirynt);
 	else
 		StdRead(filename, labirynt);
+	int height, width, pocz, kon;
+	FILE *metadata=fopen("metadata.txt", "r");
+	fscanf(metadata, "%d %d %d %d", height, width, pocz, kon);
 	divide(labirynt, resultname);
 	return 0;
 }

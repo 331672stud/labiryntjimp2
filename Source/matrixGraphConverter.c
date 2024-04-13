@@ -30,7 +30,7 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
     }
 }
 
-void conv2graph(cell_t **labirynt, int width, int height, int start, int koniec){
+void conv2graph(cell_t **labirynt, int width, int height, int start){
     removecopies(labirynt, width, height, start);
 }
 

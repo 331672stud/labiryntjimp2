@@ -112,6 +112,8 @@ void compRead(char *filename, cell_t **labirynt){
         
     }
 
-
+    FILE *metadata=fopen("metadata.txt", "w");
+    fprintf("metadata.txt", "%d %d %d %d", height, width, nrstart, nrkoniec);
+    fclose(metadata);
 }
 
