@@ -2,6 +2,6 @@
 #define DIVIDE_H
 #include "adjacencyMatrix.h"
 
-void divide(celltype *graf, char *resultname);
+void divide(cell_t **labirynt, char *resultname, int height, int width, int pocz, int kon);
 
 #endif

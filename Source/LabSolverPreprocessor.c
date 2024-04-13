@@ -19,6 +19,6 @@ int main(int argc, char **argv){
 	int height, width, pocz, kon;
 	FILE *metadata=fopen("metadata.txt", "r");
 	fscanf(metadata, "%d %d %d %d", height, width, pocz, kon);
-	divide(labirynt, resultname);
+	divide(labirynt, resultname, height, width, pocz, kon);
 	return 0;
 }

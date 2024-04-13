@@ -2,7 +2,6 @@
 #include "valconvert.h"
 #include <stdio.h>
 
-
 void usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwagonika){
     cell_t *curwagon=labirynt[komorkah][komorkaw].next;
     cell_t *replacewagon=NULL;

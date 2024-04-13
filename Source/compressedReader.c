@@ -111,7 +111,7 @@ void compRead(char *filename, cell_t **labirynt){
         }
         
     }
-
+    conv2graph(labirynt, width, height, nrstart);
     FILE *metadata=fopen("metadata.txt", "w");
     fprintf("metadata.txt", "%d %d %d %d", height, width, nrstart, nrkoniec);
     fclose(metadata);
