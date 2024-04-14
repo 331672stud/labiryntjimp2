@@ -19,7 +19,7 @@ int main(int argc, char **argv){
 		StdRead(filename, labirynt);
 	int height, width, pocz, kon;
 	FILE *metadata=fopen("metadata.txt", "r");
-	cell_t *temp;
+	cell_t *temp=NULL;
 	if(metadata==NULL){
 		printf("sraniewbanie");	
 		return EXIT_FAILURE;
@@ -28,8 +28,17 @@ int main(int argc, char **argv){
 	{
 		fscanf(metadata, "%d %d %d %d", &height, &width, &pocz, &kon);
 		fclose(metadata);
-		fprintf(stdout, "%d %d %d %d", height, width, pocz, kon);
 		//temp=labirynt[pocz/width][pocz%width].next;
+	}
+	for(int i=0;i<height;i++){
+		for(int j=0;j<width;j++){
+			temp=&labirynt[i][j];
+			while(temp!=NULL){
+				printf("%d",temp->numer);
+				temp=temp->next;
+			}
+			printf("\n");
+		}
 	}
 	int firstcount=0;
 	while(temp!=NULL){
@@ -46,6 +55,6 @@ int main(int argc, char **argv){
 		fscanf(metadata, " %d", &firstcount);
 		fclose(metadata);
 	}
-	divide(labirynt, resultname, height, width, pocz);
+	//divide(labirynt, resultname, height, width, pocz);
 	return 0;
 }
