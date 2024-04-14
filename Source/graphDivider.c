@@ -52,10 +52,10 @@ void findbranch(cell_t **labirynt, int width, int height, int start, char *resul
                 ileplikow++;
                 temp=temp->next;
             }
-            PartWrite(branch->numer, numerpliku, branch, resultname, ileplikow); 
+            PartWrite(branch->numer, numerpliku, branch, resultname, ileplikow);
+            findbranch(labirynt, width, height, labirynt[numerkomorki/width][numerkomorki%width].numer, resultname); 
         } 
         numerpliku++;
-        findbranch(labirynt, width, height, labirynt[numerkomorki/width][numerkomorki%width].numer, resultname);
         branchstarts=branchstarts->next;
     }
 }
