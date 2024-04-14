@@ -4,15 +4,17 @@
 #include "ConvertedReader.h"
 
 list_t recursiveread(){
-    
-    fileread();
     recursiveread();
 }
 
 void convRead(uint16_t height, uint16_t width, int pocz, int kon, uint8_t ilep0, char *filename){
     char *resultname = malloc(64);
+    int lastcell;
+    uint8_t branchcount;
     if(ilep0==0){
         snprintf(resultname, 64, "%s%d_%d.txt", filename, pocz, ilep0);
+        lastcell=FileRead(resultname, 0);
+        branchcount=FileRead(resultname, 1);
     }
     else
         for(int i=0;i<ilep0;i++){

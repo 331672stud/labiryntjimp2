@@ -1,7 +1,8 @@
 #include "adjacencyMatrix.h"
 #include <stdio.h>
+#include <stdbool.h>
 
-void FileRead(char *filename, cell_t *lista){
+int FileRead(char *filename, bool tryb){
     while(lista!=NULL){
         /*ustala sciezke usuwajac niepotrzebne fragmenty listy*/
     }
