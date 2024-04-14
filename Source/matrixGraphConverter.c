@@ -82,7 +82,7 @@ void usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwa
     labirynt[komorkah][komorkaw].next=replacewagon;
 }
 
-void removecopies(cell_t **labirynt, int width, int height, int start, Q* queue, v* visited){
+void removecopies(cell_t **labirynt, int width, int height, int start){
     // int startheight=start/width;
     // int startwidth=start%width;
     // cell_t currentcell=labirynt[startheight][startwidth];
@@ -93,13 +93,21 @@ void removecopies(cell_t **labirynt, int width, int height, int start, Q* queue,
     //     connections=connections->next;
     // }
 
+    Q queue = initQ(height, width);
+    Q queueNext = initQ(height, width);
+    v visited;
+    visited.numer = -1;
+    visited.next = NULL;
+
     enqueue(&queue, labirynt[start / width][start % width]);
 
     while(!isQueueEmpty(&queue)){
-        cell_t currentCell = dequeue(queue);
-
+        cell_t currentCell = dequeue(&queue);
+        cell_t *temp = visited;
+        visited = currentCell;
+        visited.next = temp; 
         if(!isInQueue(queue, currentCell) && !isInQueue(visited, currentCell)){
-            
+
         }
     }
 }
