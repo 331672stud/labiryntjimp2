@@ -106,5 +106,16 @@ cell_t **StdRead(char *filename, cell_t **labirynt){//działa
     FILE *metadata=fopen("metadata.txt", "w");
     fprintf(metadata, "%d %d %d %d", height, width, numerstart, numerkoniec);
     fclose(metadata);
+    cell_t *temp=malloc(sizeof(cell_t));
+    for(int i=0;i<height;i++){
+		for(int j=0;j<width;j++){
+			temp=&labirynt[i][j];
+			while(temp!=NULL){
+				printf("%d ",temp->numer);
+				temp=temp->next;
+			}
+			printf("\n");
+		}
+	}
     return labirynt;
 }

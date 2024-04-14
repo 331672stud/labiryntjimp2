@@ -101,7 +101,6 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
         temp->numer = visited.numer;
         temp->next = visited.next;
         visited = currentCell;
-        visited.next = temp;
         if(temp->numer != -1){
             visited.next = temp;
         } else {

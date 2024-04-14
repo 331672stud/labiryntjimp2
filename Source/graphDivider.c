@@ -8,7 +8,8 @@ void findbranch(cell_t **labirynt, int width, int height, int start, char *resul
     int startheight=start/width;
     int startwidth=start%width;
     cell_t *branch=malloc(sizeof(cell_t));
-    branch=&labirynt[startheight][startwidth];
+    branch->numer=labirynt[startheight][startwidth].numer;
+    branch->next=labirynt[startheight][startwidth].next;
     cell_t *branchstarts=branch->next;
     int numerkomorki;
     int numerpliku=0;
