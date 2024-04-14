@@ -19,15 +19,16 @@ void StdRead(char *filename, cell_t **labirynt){
         return;
     }
     fgets(bufor, 2050, plik);
-    int width=strlen(bufor);
+    int width=strlen(bufor)-1;
     if(width==2050 || width%2==0){
+        fprintf(stdout, "%d", width);
         errorcomm(2);
         return;
     }
     int height=1;
     while(fgets(bufor,2050,plik)!=NULL){
         height++;//liczy ile linijek
-        if(width!=strlen(bufor) || height>2049){
+        if(width!=strlen(bufor)-1 || height>2049){
             errorcomm(2);
             return;
         }
