@@ -83,21 +83,13 @@ void compRead(char *filename, cell_t **labirynt){
                         return;
                     }
                 }else if(value==32){
-                        temp->numer=trueval(current_height+1)*width+trueval(current_width);
-                        temp->next=labirynt[trueval(current_height-1)][trueval(current_width)].next;
-                        labirynt[trueval(current_height-1)][trueval(current_width)].next=temp;
-                        temp->numer-=width;
-                        temp->next=labirynt[trueval(current_height+1)][trueval(current_width)].next;
-                        labirynt[trueval(current_height+1)][trueval(current_width)].next=temp;                    
+                    append(&labirynt[trueval(current_height-1)][trueval(current_width)].next, trueval(current_height+1)*width+trueval(current_width));
+                    append(&labirynt[trueval(current_height+1)][trueval(current_width)].next, trueval(current_height-1)*width+trueval(current_width)); 
                 } //up down pass
             }else if(current_width%2==0){
                 if(value==32){
-                    temp->numer=trueval(current_height)*width+trueval(current_width+1);
-                    temp->next=labirynt[trueval(current_height)][trueval(current_width-1)].next;
-                    labirynt[trueval(current_height)][trueval(current_width-1)].next=temp;
-                    temp->numer-=1;
-                    temp->next=labirynt[trueval(current_height)][trueval(current_width+1)].next;
-                    labirynt[trueval(current_height)][trueval(current_width+1)].next=temp;
+                    append(&labirynt[trueval(current_height)][trueval(current_width-1)].next, trueval(current_height)*width+trueval(current_height+1));
+                    append(&labirynt[trueval(current_height)][trueval(current_width+1)].next, trueval(current_height)*width+trueval(current_width-1));
                 }
             } //left right passfor(int i=0;i<height;i++){
             else if(value!=32){
@@ -116,4 +108,3 @@ void compRead(char *filename, cell_t **labirynt){
     fprintf(metadata, "%d %d %d %d", height, width, nrstart, nrkoniec);
     fclose(metadata);
 }
-
