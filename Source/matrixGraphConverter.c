@@ -130,6 +130,8 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
             queueNext=initQ(height, width);
         }
     }
+    freeQueue(&queue);
+    freeQueue(&queueNext);
 }
 
 void conv2graph(cell_t **labirynt, int width, int height, int start){

@@ -4,7 +4,11 @@
 
 void convRead(uint16_t height, uint16_t width, int pocz, int kon, uint8_t ilep0, char *filename){
     list_t lista;
-    if(ilep0)
+    if(ilep0==0){
+
+    } else{
+        
+    }
     /*
     Chcemy znaleźć wszystkie ścieżki od pocz do kon
     nie wiemy ile ich jest wiec zatrzymujemy sie gdy sprawdzimy wszystkie mozliwe sciezki metoda dfs
@@ -18,7 +22,7 @@ void convRead(uint16_t height, uint16_t width, int pocz, int kon, uint8_t ilep0,
 }
 
 
-void removecopies(cell_t **labirynt, int width, int height, int start){
+/*void removecopies(cell_t **labirynt, int width, int height, int start){
     int startheight=start/width;
     int startwidth=start%width;
     cell_t currentcell=labirynt[startheight][startwidth];
@@ -32,4 +36,4 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
 
 void conv2graph(cell_t **labirynt, int width, int height, int start){
     removecopies(labirynt, width, height, start);
-}
+}*/
