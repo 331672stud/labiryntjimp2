@@ -91,14 +91,6 @@ void compRead(char *filename, cell_t **labirynt){
                         labirynt[trueval(current_height+1)][trueval(current_width)].next=temp;                    
                 } //up down pass
             }else if(current_width%2==0){
-<<<<<<< HEAD
-                temp->numer=trueval(current_height)*width+trueval(current_width+1);
-                temp->next=labirynt[trueval(current_height)][trueval(current_width-1)].next;
-                labirynt[trueval(current_height)][trueval(current_width-1)].next=temp;
-                temp->numer-=1;
-                temp->next=labirynt[trueval(current_height)][trueval(current_width+1)].next;
-                labirynt[trueval(current_height)][trueval(current_width+1)].next=temp;
-=======
                 if(value==32){
                     temp->numer=trueval(current_height)*width+trueval(current_width+1);
                     temp->next=labirynt[trueval(current_height)][trueval(current_width-1)].next;
@@ -107,7 +99,6 @@ void compRead(char *filename, cell_t **labirynt){
                     temp->next=labirynt[trueval(current_height)][trueval(current_width+1)].next;
                     labirynt[trueval(current_height)][trueval(current_width+1)].next=temp;
                 }
->>>>>>> 7016ab4eeeddd9f861d2b4e2591ad3bee358afee
             } //left right pass
             else if(value!=32){
                     errorcomm(2);
