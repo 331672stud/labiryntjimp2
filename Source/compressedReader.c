@@ -3,6 +3,7 @@
 #include "adjacencyMatrix.h"
 #include "valconvert.h"
 #include "Errormsg.h"
+#include "matrixGraphConverter.h"
 
 
 void compRead(char *filename, cell_t **labirynt){
@@ -10,7 +11,7 @@ void compRead(char *filename, cell_t **labirynt){
     FILE *plik = fopen(filename, "rb");
     if(plik==NULL){
         errorcomm(0);
-        return EXIT_FAILURE;
+        return;
     }
     
     unsigned char file_id[4];
@@ -45,7 +46,7 @@ void compRead(char *filename, cell_t **labirynt){
     int width = trueval(columns);
     if(width == 2050 || width % 2 == 0){
         errorcomm(2);
-        return EXIT_FAILURE;
+        return;
     }
     for(int i = 0; i < height; i++){
         labirynt[i] = malloc(width * sizeof(cell_t));
@@ -81,7 +82,7 @@ void compRead(char *filename, cell_t **labirynt){
                 if(current_width%2==0) //always a wall
                     if(value!=58){
                         errorcomm(2);
-                        return EXIT_FAILURE;
+                        return;
                     }
                 else if(value==20){
                         temp->numer=trueval(current_height+1)*width+trueval(current_width);
@@ -101,7 +102,7 @@ void compRead(char *filename, cell_t **labirynt){
             } //left right pass
             else if(value!=20){
                     errorcomm(2);
-                    return EXIT_FAILURE;
+                    return;
                 }//zawsze komorka
             current_width++;
             if(current_width==columns){
@@ -113,7 +114,7 @@ void compRead(char *filename, cell_t **labirynt){
     }
     conv2graph(labirynt, width, height, nrstart);
     FILE *metadata=fopen("metadata.txt", "w");
-    fprintf("metadata.txt", "%d %d %d %d", height, width, nrstart, nrkoniec);
+    fprintf(metadata, "%d %d %d %d", height, width, nrstart, nrkoniec);
     fclose(metadata);
 }
 

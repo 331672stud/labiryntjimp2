@@ -1,1 +1,1 @@
-void errorcom(int code);
+void errorcomm(int code);

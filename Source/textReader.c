@@ -1,32 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "adjacencyMatrix.h"
 #include "valconvert.h"
 #include "Errormsg.h"
+#include "matrixGraphConverter.h"
+
 
 void StdRead(char *filename, cell_t **labirynt){
     FILE *plik=fopen(filename, "r");
     if(plik==NULL){
         errorcomm(0);
-        return EXIT_FAILURE;
+        return;
     }
     char *bufor=malloc(2050);//2*1024+1 i jeszcze 1 na null albo pokazujący że labirynt jest za duży
     if(bufor==NULL){
         errorcomm(1);
-        return EXIT_FAILURE;
+        return;
     }
     fgets(bufor, 2050, plik);
     int width=strlen(bufor);
     if(width==2050 || width%2==0){
         errorcomm(2);
-        return EXIT_FAILURE;
+        return;
     }
     int height=1;
     while(fgets(bufor,2050,plik)!=NULL){
         height++;//liczy ile linijek
         if(width!=strlen(bufor) || height>2049){
             errorcomm(2);
-            return EXIT_FAILURE;
+            return;
         }
     }
     width=trueval(width);
@@ -50,8 +53,8 @@ void StdRead(char *filename, cell_t **labirynt){
     for(int i=0;i<posval(height);i++){
         for(int j=0;j<posval(width);j++){
             fgets(bufor,2050,plik);
-            if(bufor[j]=="P" || bufor[j]=="K")
-                if(bufor[j]=="P"){
+            if(bufor[j]=='P' || bufor[j]=='K')
+                if(bufor[j]=='P'){
                     if(i==0){
                         numerstart=trueval(j);
                     }
@@ -69,11 +72,11 @@ void StdRead(char *filename, cell_t **labirynt){
                 }
             else if(i%2==0)
                 if(j%2==0) //always a wall
-                    if(bufor[j]!="X"){
+                    if(bufor[j]!='X'){
                         errorcomm(2);
-                        return EXIT_FAILURE;
+                        return;
                     }
-                else if(bufor[j]==" "){
+                else if(bufor[j]==' '){
                         temp->numer=trueval(i+1)*width+trueval(j);
                         temp->next=labirynt[trueval(i-1)][trueval(j)].next;
                         labirynt[trueval(i-1)][trueval(j)].next=temp;
@@ -81,7 +84,7 @@ void StdRead(char *filename, cell_t **labirynt){
                         temp->next=labirynt[trueval(i+1)][trueval(j)].next;
                         labirynt[trueval(i+1)][trueval(j)].next=temp;                    
                 } //up down pass
-            else if(j%2==0 && bufor[j]==" "){
+            else if(j%2==0 && bufor[j]==' '){
                 temp->numer=trueval(i)*width+trueval(j+1);
                 temp->next=labirynt[trueval(i)][trueval(j-1)].next;
                 labirynt[trueval(i)][trueval(j-1)].next=temp;
@@ -89,14 +92,14 @@ void StdRead(char *filename, cell_t **labirynt){
                 temp->next=labirynt[trueval(i)][trueval(j+1)].next;
                 labirynt[trueval(i)][trueval(j+1)].next=temp;
             } //left right pass
-            else if(bufor[j]!=" "){
+            else if(bufor[j]!=' '){
                     errorcomm(2);
-                    return EXIT_FAILURE;
+                    return;
                 }
         }
     }
     conv2graph(labirynt, width, height, numerstart);
     FILE *metadata=fopen("metadata.txt", "w");
-    fprintf("metadata.txt", "%d %d %d %d", height, width, numerstart, numerkoniec);
+    fprintf(metadata, "%d %d %d %d", height, width, numerstart, numerkoniec);
     fclose(metadata);
 }
