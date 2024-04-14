@@ -7,7 +7,7 @@
 
 
 void compRead(char *filename, cell_t **labirynt){
-
+    
     FILE *plik = fopen(filename, "rb");
     if(plik==NULL){
         errorcomm(0);
@@ -44,10 +44,6 @@ void compRead(char *filename, cell_t **labirynt){
         return;
     }
     int width = trueval(columns);
-    if(width == 2050 || width % 2 == 0){
-        errorcomm(2);
-        return;
-    }
     for(int i = 0; i < height; i++){
         labirynt[i] = malloc(width * sizeof(cell_t));
     }
@@ -72,15 +68,18 @@ void compRead(char *filename, cell_t **labirynt){
 
     int current_height = 0;
     int current_width = 0;
-
     while(current_height != lines && current_width != columns){
         fread(&separator, sizeof(separator_id), 1, plik);
         fread(&value, sizeof(wall), 1, plik);
         fread(&count, sizeof(path), 1, plik);
+        printf("separator: %d\n", separator);
+        printf("value: %c\n", value);
+        printf("count: %d\n", count);
         for(int i=0;i<count;i++){
             if(current_height%2==0)
             {
                 if(current_width%2==0) //always a wall
+<<<<<<< HEAD
                 {
                     if(value!=58){
                         errorcomm(2);
@@ -88,6 +87,14 @@ void compRead(char *filename, cell_t **labirynt){
                     }
                 }    
                 else if(value==20){
+=======
+                    if(value!=88){
+                        printf("chujowo2");
+                        errorcomm(2);
+                        return;
+                    }
+                else if(value==32){
+>>>>>>> 8d5b4957b6581c4da84d5670269b0cab7582ef95
                         temp->numer=trueval(current_height+1)*width+trueval(current_width);
                         temp->next=labirynt[trueval(current_height-1)][trueval(current_width)].next;
                         labirynt[trueval(current_height-1)][trueval(current_width)].next=temp;
@@ -95,8 +102,12 @@ void compRead(char *filename, cell_t **labirynt){
                         temp->next=labirynt[trueval(current_height+1)][trueval(current_width)].next;
                         labirynt[trueval(current_height+1)][trueval(current_width)].next=temp;                    
                 } //up down pass
+<<<<<<< HEAD
             }    
             else if(current_width%2==0 && value==20){
+=======
+            else if(current_width%2==0 && value==32){
+>>>>>>> 8d5b4957b6581c4da84d5670269b0cab7582ef95
                 temp->numer=trueval(current_height)*width+trueval(current_width+1);
                 temp->next=labirynt[trueval(current_height)][trueval(current_width-1)].next;
                 labirynt[trueval(current_height)][trueval(current_width-1)].next=temp;
@@ -104,7 +115,8 @@ void compRead(char *filename, cell_t **labirynt){
                 temp->next=labirynt[trueval(current_height)][trueval(current_width+1)].next;
                 labirynt[trueval(current_height)][trueval(current_width+1)].next=temp;
             } //left right pass
-            else if(value!=20){
+            else if(value!=32){
+                    printf("value chujowo: %d\n", value);
                     errorcomm(2);
                     return;
                 }//zawsze komorka
