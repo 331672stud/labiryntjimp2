@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include "getopt.h"
+#include "getoptt.h"
 #include "PathFinder.h"
 #include "FileList.h"
-#include "pathLocator.h"
-#include "pathSolver.h"
 #include "writer.h"
 #include "adjacencyMatrix.h"
 #define optstring ":f:w:h:" //f-przedrostek plików w-plik wynikowy, h help

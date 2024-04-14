@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "getopt.h"
+#include "getoptt.h"
 #include "compressedReader.h"
 #include "textReader.h"
 #include "graphDivider.h"
