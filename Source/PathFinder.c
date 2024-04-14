@@ -3,58 +3,60 @@
 #include "FileList.h"
 #include "ConvertedReader.h"
 #include <stdbool.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-list_t recursiveread(){
-    recursiveread();
+uint8_t countnext(resultname){
+    uint8_t count=0;
+    FILE *plik=fopen(resultname, "r");
+    char *bufor=malloc(32);
+    char *numb=malloc(2);
+    while(fgets(bufor, 32, plik)!=NULL)
+        if(strstr(bufor, "_")!=NULL)
+            numb=strstr(bufor,"_");
+    count=numb[1]-'0';
+    return count;
+}
+
+int lastcell(char *filename){
+    int cellnumber;
+    return cellnumber;
+}
+
+void recursiveRead(uint16_t height, uint16_t width, int pocz, int kon, uint8_t ilep0, char *filename, list_t *lista){
+    char *resultname = malloc(64);
+    uint8_t branchcount;
+    bool czydoprintu;
+    if(ilep0==0){
+        Listappend(&lista, pocz, ilep0);
+        snprintf(resultname, 64, "%s%d_%d.txt", filename, pocz, ilep0);
+        branchcount=countnext(resultname);
+        if(branchcount!=0){
+            recursiveRead(height, width, lastcell(filename), kon, branchcount, filename, lista);
+        }
+        else{
+            czydoprintu=isEnd(lista, kon);
+            if(czydoprintu)
+                printList(lista, kon);
+        }
+    } else for(int i=0;i<ilep0;i++){
+        Listappend(&lista, pocz, i);
+        snprintf(resultname, 64, "%s%d_%d.txt", filename, pocz, i);
+        branchcount=countnext(resultname);
+        if(branchcount!=0){
+            recursiveRead(height, width, lastcell(filename), kon, branchcount, filename, lista);
+        }
+        else{
+            czydoprintu=isEnd(lista, kon);
+            if(czydoprintu)
+                printList(lista, kon);
+        }
+        deappend(&lista);
+    }
 }
 
 void convRead(uint16_t height, uint16_t width, int pocz, int kon, uint8_t ilep0, char *filename){
-    char *resultname = malloc(64);
-    int lastcell;
-    uint8_t branchcount;
-    bool czyend;
     list_t *lista=malloc(sizeof(list_t));
-    if(ilep0==0){
-        Listappend(lista, pocz, ilep0);
-        snprintf(resultname, 64, "%s%d_%d.txt", filename, pocz, ilep0);
-        czyend=checkend(resultname);
-        if(czyend==0){
-
-        }
-    } else for(int i=0;i<ilep0;i++){
-        Listappend(lista, pocz, i);
-        snprintf(resultname, 64, "%s%d_%d.txt", filename, pocz, i);
-        czyend=checkend(resultname);
-        if(czyend==0){
-            
-        }
-    }
-
-    /*
-    Chcemy znaleźć wszystkie ścieżki od pocz do kon
-    nie wiemy ile ich jest wiec zatrzymujemy sie gdy sprawdzimy wszystkie mozliwe sciezki metoda dfs
-    tworzymy liste plikow dla kazdej sciezki
-    if ends in kon
-    fprintf sciezkan
-    else
-    free
-    i w kolko
-    */
+    recursiveRead(height, width, pocz, kon, ilep0, filename, lista);
+    
 }
-
-
-/*void removecopies(cell_t **labirynt, int width, int height, int start){
-    int startheight=start/width;
-    int startwidth=start%width;
-    cell_t currentcell=labirynt[startheight][startwidth];
-    cell_t *connections=currentcell.next;
-    while(connections!=NULL){
-        usuwaniewagonika(labirynt, connections->numer/width, connections->numer%width, start);
-        removecopies(labirynt, width, height, connections->numer);
-        connections=connections->next;
-    }
-}
-
-void conv2graph(cell_t **labirynt, int width, int height, int start){
-    removecopies(labirynt, width, height, start);
-}*/

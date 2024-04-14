@@ -17,3 +17,16 @@ void Listappend( list_t **list, int nrkom, uint8_t nrpliku)
     }
     last->next = new;}
 }
+
+void deappend( list_t **list)
+{
+    list_t *last = *list;
+    if (*list == NULL) {
+        return;
+    }
+    else{
+    while (last->next != NULL) {
+        last = last->next;
+    }
+    last=NULL;}
+}
