@@ -6,21 +6,21 @@
 
 
 
-void parsearg(int argc, char **argv, char *optstring, char *filename, char *resultname){
+void parsearg(int argc, char **argv, char *optstring, char **filename, char **resultname){
     int opt;
     while((opt = getopt(argc, argv, optstring)) != -1){
         switch(opt){
             case 't':
-                filename = optarg;
+                *filename = optarg;
                 break;
             case 'n':
-                resultname = optarg;
+                *resultname = optarg;
                 break;
             case 'f':
-                filename = optarg;
+                *filename = optarg;
                 break;
             case 'w':
-                resultname = optarg;
+                *resultname = optarg;
                 break;
             default:
                 fprintf(stderr, "Nieznana flaga: %s\n", argv[0]);
