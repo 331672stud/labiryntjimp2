@@ -52,11 +52,11 @@ void StdRead(char *filename, cell_t **labirynt){
     temp->next=NULL;
     for(int i=0;i<posval(height);i++){
         fprintf(stdout, "\n");
+        fgets(bufor,2050,plik);
         for(int j=0;j<posval(width);j++){
-            fprintf(stdout, "%c", bufor[j]);
             int imod=i%2;
             int jmod=j%2;
-            fgets(bufor,2050,plik);
+            fprintf(stdout, "%c", bufor[j]);
             if(bufor[j]=='P' || bufor[j]=='K')
                 if(bufor[j]=='P'){
                     if(i==0){
