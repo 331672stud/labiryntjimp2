@@ -75,7 +75,10 @@ void compRead(char *filename, cell_t **labirynt){
         printf("separator: %d\n", separator);
         printf("value: %c\n", value);
         printf("count: %d\n", count);
-        for(int i=0;i<count;i++){
+        printf("currenth: %d\n", current_height);
+        printf("currentw: %d\n", current_width);
+        printf("_______________________\n");
+        for(int i=0;i <= count;i++){
             if(current_height%2==0)
             {
                 if(current_width%2==0) //always a wall
@@ -94,13 +97,15 @@ void compRead(char *filename, cell_t **labirynt){
                         temp->next=labirynt[trueval(current_height+1)][trueval(current_width)].next;
                         labirynt[trueval(current_height+1)][trueval(current_width)].next=temp;                    
                 } //up down pass
-            }else if(current_width%2==0 && value==32){
-                temp->numer=trueval(current_height)*width+trueval(current_width+1);
-                temp->next=labirynt[trueval(current_height)][trueval(current_width-1)].next;
-                labirynt[trueval(current_height)][trueval(current_width-1)].next=temp;
-                temp->numer-=1;
-                temp->next=labirynt[trueval(current_height)][trueval(current_width+1)].next;
-                labirynt[trueval(current_height)][trueval(current_width+1)].next=temp;
+            }else if(current_width%2==0){
+                if(value==32){
+                    temp->numer=trueval(current_height)*width+trueval(current_width+1);
+                    temp->next=labirynt[trueval(current_height)][trueval(current_width-1)].next;
+                    labirynt[trueval(current_height)][trueval(current_width-1)].next=temp;
+                    temp->numer-=1;
+                    temp->next=labirynt[trueval(current_height)][trueval(current_width+1)].next;
+                    labirynt[trueval(current_height)][trueval(current_width+1)].next=temp;
+                }
             } //left right pass
             else if(value!=32){
                     printf("value chujowo: %d\n", value);
