@@ -61,11 +61,6 @@ void freeQueue(Q* queue) {
     free(queue);
 }
 
-typedef struct visited{
-    int numer; //numer komorki polaczonej
-    struct cell *next; //kolejna komorka w ciagu
-} v;
-
 
 void usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwagonika){
     cell_t *curwagon=labirynt[komorkah][komorkaw].next;
@@ -95,7 +90,7 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
 
     Q queue = initQ(height, width);
     Q queueNext = initQ(height, width);
-    v visited;
+    cell_t visited;
     visited.numer = -1;
     visited.next = NULL;
 
@@ -103,12 +98,10 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
 
     while(!isQueueEmpty(&queue)){
         cell_t currentCell = dequeue(&queue);
-        cell_t *temp = visited;
+        cell_t *temp=malloc(sizeof(cell_t));
+        temp->numer = visited.numer;
+        temp->next = visited.next;
         visited = currentCell;
-        visited.next = temp; 
-        if(!isInQueue(queue, currentCell) && !isInQueue(visited, currentCell)){
-
-        }
     }
 }
 
