@@ -2,6 +2,7 @@
 #define TXTREADER_H
 #include "adjacencyMatrix.h"
 
-void StdRead(char *filename, cell_t **labirynt);
+
+void stdRead(char *filename, cell_t **labirynt);
 
 #endif

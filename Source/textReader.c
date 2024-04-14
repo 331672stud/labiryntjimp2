@@ -2,10 +2,13 @@
 #include <stdlib.h>
 #include "adjacencyMatrix.h"
 #include "valconvert.h"
-#include "Errormsg.h"
+#include "errormsg.h"
 
-void StdRead(char *filename, cell_t **labirynt){
+
+void stdRead(char *filename, cell_t **labirynt){
+    
     FILE *plik=fopen(filename, "r");
+    
     if(plik==NULL){
         errorcomm(0);
         return EXIT_FAILURE;

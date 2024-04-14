@@ -1,1 +1,0 @@
-void errorcom(int code);

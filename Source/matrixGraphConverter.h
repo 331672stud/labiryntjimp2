@@ -2,6 +2,7 @@
 #define CONVERT_H
 #include "adjacencyMatrix.h"
 
+
 void usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwagonika);
 
 void removecopies(cell_t **labirynt, int width, int height, int start);

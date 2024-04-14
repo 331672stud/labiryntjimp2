@@ -1,9 +1,10 @@
 #include "adjacencyMatrix.h"
+#include "errormsg.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 
-void PartWrite(int nr_komorki, int nr_pliku, cell_t *branch, char *resultname){
+void partWrite(int nr_komorki, int nr_pliku, cell_t *branch, char *resultname){
     
     char *filename = malloc(64); 
     

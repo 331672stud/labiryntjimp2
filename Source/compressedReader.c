@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "adjacencyMatrix.h"
 #include "valconvert.h"
-#include "Errormsg.h"
+#include "errormsg.h"
 
 
 void compRead(char *filename, cell_t **labirynt){
@@ -116,4 +116,3 @@ void compRead(char *filename, cell_t **labirynt){
     fprintf("metadata.txt", "%d %d %d %d", height, width, nrstart, nrkoniec);
     fclose(metadata);
 }
-
