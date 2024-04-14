@@ -6,7 +6,6 @@
 #include "Errormsg.h"
 #include "matrixGraphConverter.h"
 
-
 void StdRead(char *filename, cell_t **labirynt){//działa
     FILE *plik=fopen(filename, "r");
     if(plik==NULL){
@@ -50,8 +49,20 @@ void StdRead(char *filename, cell_t **labirynt){//działa
     cell_t *temp = malloc(sizeof(cell_t));
     temp->numer=0;
     temp->next=NULL;
+    
     for(int i=0;i<posval(height);i++)
     {
+        for(int k=0;k<height;k++){
+		    for(int l=0;l<width;l++){
+			    temp=&labirynt[k][l];
+			    while(temp!=NULL){
+				    printf("%d ",temp->numer);
+				    temp=temp->next;
+			    }
+			    printf("\n");
+		    }
+	    }
+        temp=&labirynt[0][0];
         fgets(bufor,posval(width)+2,plik);
         for(int j=0;j<posval(width);j++)
         {
@@ -84,12 +95,8 @@ void StdRead(char *filename, cell_t **labirynt){//działa
                 }
                 else{             
                     if(bufor[j]==' '){
-                        temp->numer=trueval(i+1)*width+trueval(j);
-                        temp->next=labirynt[trueval(i-1)][trueval(j)].next;
-                        labirynt[trueval(i-1)][trueval(j)].next=temp;
-                        temp->numer-=width;
-                        temp->next=labirynt[trueval(i+1)][trueval(j)].next;
-                        labirynt[trueval(i+1)][trueval(j)].next=temp; 
+                        append2(&labirynt[trueval(i-1)][trueval(j)].next, trueval(i+1)*width+trueval(j));
+                        append2(&labirynt[trueval(i+1)][trueval(j)].next, trueval(i-1)*width+trueval(j)); 
                     } //up down pass
                 } 
             }else
@@ -97,12 +104,8 @@ void StdRead(char *filename, cell_t **labirynt){//działa
                 if (j%2==0)
                 {
                     if(bufor[j]==' '){
-                        temp->numer=trueval(i)*width+trueval(j+1);
-                        temp->next=labirynt[trueval(i)][trueval(j-1)].next;
-                        labirynt[trueval(i)][trueval(j-1)].next=temp;
-                        temp->numer-=1;
-                        temp->next=labirynt[trueval(i)][trueval(j+1)].next;
-                        labirynt[trueval(i)][trueval(j+1)].next=temp;
+                        append2(&labirynt[trueval(i)][trueval(j-1)].next, trueval(i)*width+trueval(j+1));
+                        append2(&labirynt[trueval(i)][trueval(j+1)].next, trueval(i)*width+trueval(j-1));
                     } //left right pass                
                 } else
                 {
@@ -114,8 +117,18 @@ void StdRead(char *filename, cell_t **labirynt){//działa
             }
         }
     }
-    conv2graph(labirynt, width, height, numerstart);
+    //conv2graph(labirynt, width, height, numerstart);
     FILE *metadata=fopen("metadata.txt", "w");
     fprintf(metadata, "%d %d %d %d", height, width, numerstart, numerkoniec);
     fclose(metadata);
+   for(int i=0;i<height;i++){
+		for(int j=0;j<width;j++){
+			temp=&labirynt[i][j];
+			while(temp!=NULL){
+				printf("%d ",temp->numer);
+				temp=temp->next;
+			}
+			printf("\n");
+		}
+	}
 }

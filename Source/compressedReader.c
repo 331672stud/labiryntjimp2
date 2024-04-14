@@ -99,7 +99,7 @@ void compRead(char *filename, cell_t **labirynt){
                     temp->next=labirynt[trueval(current_height)][trueval(current_width+1)].next;
                     labirynt[trueval(current_height)][trueval(current_width+1)].next=temp;
                 }
-            } //left right pass
+            } //left right passfor(int i=0;i<height;i++){
             else if(value!=32){
                     errorcomm(2);
                     return;
@@ -110,7 +110,6 @@ void compRead(char *filename, cell_t **labirynt){
                 current_width=0;
             }    
         }
-        
     }
     conv2graph(labirynt, width, height, nrstart);
     FILE *metadata=fopen("metadata.txt", "w");

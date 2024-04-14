@@ -5,4 +5,6 @@ int trueval(int posval);
 
 int posval(int trueval);
 
+void append( cell_t **list, int val);
+
 #endif

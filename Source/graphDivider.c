@@ -2,22 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "graphWriter.h"
-
-void append( cell_t **branch, int val)
-{
-    cell_t *new=malloc(sizeof(cell_t));
-    new->numer = val;
-    cell_t *last = *branch;
-    new->next = NULL;
-    if (*branch == NULL) {
-        *branch = new;
-        return;
-    }
-    while (last->next != NULL) {
-        last = last->next;
-    }
-    last->next = new;
-}
+#include "valconvert.h"
 
 void findbranch(cell_t **labirynt, int width, int height, int start, char *resultname){
     int startheight=start/width;

@@ -30,7 +30,7 @@ int main(int argc, char **argv){
 		fclose(metadata);
 		//temp=labirynt[pocz/width][pocz%width].next;
 	}
-	for(int i=0;i<height;i++){
+	/*for(int i=0;i<height;i++){
 		for(int j=0;j<width;j++){
 			temp=&labirynt[i][j];
 			while(temp!=NULL){
@@ -39,7 +39,7 @@ int main(int argc, char **argv){
 			}
 			printf("\n");
 		}
-	}
+	}*/
 	int firstcount=0;
 	while(temp!=NULL){
 		firstcount++;
