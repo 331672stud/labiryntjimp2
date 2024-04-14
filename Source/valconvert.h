@@ -1,5 +1,6 @@
 #ifndef COMMONFUNC_H
 #define COMMONFUNC_H
+#include "adjacencyMatrix.h"
 
 int trueval(int posval);
 
