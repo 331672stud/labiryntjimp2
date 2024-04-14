@@ -61,7 +61,6 @@ void freeQueue(Q* queue) {
     free(queue);
 }
 
-
 void usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwagonika){
     cell_t *curwagon=labirynt[komorkah][komorkaw].next;
     cell_t *replacewagon=NULL;
@@ -108,6 +107,7 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
         } else {
             visited.next = NULL;
         }
+
     }
 }
 
