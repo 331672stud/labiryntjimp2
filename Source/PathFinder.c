@@ -1,7 +1,7 @@
 #include "adjacencyMatrix.h"
 #include <stdint.h>
 #include "FileList.h"
-#include "convertedReader.h"
+#include "ConvertedReader.h"
 
 list_t recursiveread(){
     

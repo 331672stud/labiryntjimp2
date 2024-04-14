@@ -1,6 +1,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "Errormsg.h"
+
 
 
 void parsearg(int argc, char **argv, char *optstring, char **filename, char **resultname){

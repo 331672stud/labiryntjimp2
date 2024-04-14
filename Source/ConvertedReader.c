@@ -1,5 +1,5 @@
-
-
+#include "adjacencyMatrix.h"
+#include <stdio.h>
 
 void FileRead(char *filename, cell_t *lista){
     while(lista!=NULL){
