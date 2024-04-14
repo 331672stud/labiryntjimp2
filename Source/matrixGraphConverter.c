@@ -117,8 +117,17 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
         } else {
             visited.next = NULL;
         }
-        if(isInCell_t(&visited, currentCell.numer) == 0){
-            usuwaniewagonika(labirynt, currentCell.numer / width, currentCell.numer % width, start);
+        temp=currentCell.next;
+        while(temp!=NULL)
+            if(isInCell_t(&visited, temp->numer) == 0){
+                usuwaniewagonika(labirynt, temp->numer / width, temp->numer % width, currentCell.next);
+                if(isInQueue(&queueNext, labirynt[temp->numer/width][temp->numer%width])==0)
+                    enqueue(&queueNext, labirynt[temp->numer/width][temp->numer%width]);
+            }
+        if(isQueueEmpty(&queue) && !isQueueEmpty(&queueNext))
+        {
+            queue=queueNext;
+            queueNext=initQ(height, width);
         }
     }
 }
