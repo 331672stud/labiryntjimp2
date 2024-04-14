@@ -51,7 +51,9 @@ void StdRead(char *filename, cell_t **labirynt){
     temp->numer=0;
     temp->next=NULL;
     for(int i=0;i<posval(height);i++){
+        fprintf(stdout, "\n");
         for(int j=0;j<posval(width);j++){
+            fprintf(stdout, "%c", bufor[j]);
             int imod=i%2;
             int jmod=j%2;
             fgets(bufor,2050,plik);
@@ -86,7 +88,7 @@ void StdRead(char *filename, cell_t **labirynt){
                     break;
                 
                 default:
-                    if(bufor[j]==' '){
+                    if(bufor[j]==' ' && i>2 && i<posval(height)){
                         fprintf(stdout, "%c i: %d j: %d", bufor[j], i , j);
                         temp->numer=trueval(i+1)*width+trueval(j);
                         temp->next=labirynt[trueval(i-1)][trueval(j)].next;
@@ -103,7 +105,7 @@ void StdRead(char *filename, cell_t **labirynt){
                 switch (jmod)
                 {
                 case 0:
-                    if(bufor[j]==' '){
+                    if(bufor[j]==' ' && j>0 && j<posval(width)){
                         fprintf(stdout, "%c i: %d j: %d", bufor[j], i , j);
                         temp->numer=trueval(i)*width+trueval(j+1);
                         temp->next=labirynt[trueval(i)][trueval(j-1)].next;

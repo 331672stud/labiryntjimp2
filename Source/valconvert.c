@@ -6,6 +6,6 @@ int trueval(int posval){ //numer komorki
 
 int posval(int trueval){ //wartosc pozycyjna dla calego pliku
     int posval=trueval*=2;
-    posval-=1;
+    posval+=1;
     return posval;
 }
