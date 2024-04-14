@@ -16,20 +16,10 @@ int main(int argc, char **argv){
 	if(strstr(filename, ".bin")!=NULL)
 		compRead(filename, labirynt);
 	else
-		StdRead(filename, labirynt);
+		labirynt=StdRead(filename, labirynt);
 	int height, width, pocz, kon;
 	FILE *metadata=fopen("metadata.txt", "r");
-	cell_t *temp=NULL;
-	if(metadata==NULL){
-		printf("sraniewbanie");	
-		return EXIT_FAILURE;
-	}
-	else
-	{
-		fscanf(metadata, "%d %d %d %d", &height, &width, &pocz, &kon);
-		fclose(metadata);
-		//temp=labirynt[pocz/width][pocz%width].next;
-	}
+	cell_t *temp = malloc(sizeof(cell_t));
 	/*for(int i=0;i<height;i++){
 		for(int j=0;j<width;j++){
 			temp=&labirynt[i][j];
@@ -40,6 +30,16 @@ int main(int argc, char **argv){
 			printf("\n");
 		}
 	}*/
+	if(metadata==NULL){
+		printf("brak pliku");	
+		return EXIT_FAILURE;
+	}
+	else
+	{
+		fscanf(metadata, "%d %d %d %d", &height, &width, &pocz, &kon);
+		fclose(metadata);
+		temp=&labirynt[pocz/width][pocz%width];
+	}
 	int firstcount=0;
 	while(temp!=NULL){
 		firstcount++;
@@ -47,14 +47,14 @@ int main(int argc, char **argv){
 	} //ile resultname0_ .txt
 	metadata=fopen("metadata.txt", "a");
 	if(metadata==NULL){
-		printf("sraniewbanie");	
+		printf("nie udalo sie znalezc metadata.txt");	
 		return EXIT_FAILURE;
 	}
 	else
 	{
-		fscanf(metadata, " %d", &firstcount);
+		fprintf(metadata, " %d", firstcount);
 		fclose(metadata);
 	}
-	//divide(labirynt, resultname, height, width, pocz);
+	divide(labirynt, resultname, height, width, pocz);
 	return 0;
 }

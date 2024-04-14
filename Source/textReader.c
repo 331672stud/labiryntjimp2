@@ -6,29 +6,29 @@
 #include "Errormsg.h"
 #include "matrixGraphConverter.h"
 
-void StdRead(char *filename, cell_t **labirynt){//działa
+cell_t **StdRead(char *filename, cell_t **labirynt){//działa
     FILE *plik=fopen(filename, "r");
     if(plik==NULL){
         errorcomm(0);
-        return;
+        return NULL;
     }
     char *bufor=malloc(2050);//2*1024+1 i jeszcze 1 na null albo pokazujący że labirynt jest za duży
     if(bufor==NULL){
         errorcomm(1);
-        return;
+        return NULL;
     }
     fgets(bufor, 2050, plik);
     int width=strlen(bufor)-1;
     if(width==2050 || width%2==0){
         errorcomm(2);
-        return;
+        return NULL;
     }
     int height=1;
     while(fgets(bufor,2050,plik)!=NULL){
         height++;//liczy ile linijek
         if(width!=strlen(bufor)-1 || height>2049){
             errorcomm(2);
-            return;
+            return NULL;
         }
     }
     width=trueval(width);
@@ -45,11 +45,7 @@ void StdRead(char *filename, cell_t **labirynt){//działa
     }//wyzerowana lista
     rewind(plik);
     int numerstart;
-    int numerkoniec;
-    cell_t *temp = malloc(sizeof(cell_t));
-    temp->numer=0;
-    temp->next=NULL;
-    
+    int numerkoniec;    
     for(int i=0;i<posval(height);i++)
     {
         fgets(bufor,posval(width)+2,plik);
@@ -79,7 +75,7 @@ void StdRead(char *filename, cell_t **labirynt){//działa
                 //always a wall 
                     if(bufor[j]!='X'){
                         errorcomm(2);
-                        return;
+                        return NULL;
                     }
                 }
                 else{             
@@ -100,35 +96,15 @@ void StdRead(char *filename, cell_t **labirynt){//działa
                 {
                     if(bufor[j]!=' '){//always cell
                         errorcomm(2);
-                        return;
+                        return NULL;
                     }
                 }
             }
         }
     }
-    for(int i=0;i<height;i++){
-		for(int j=0;j<width;j++){
-			temp=&labirynt[i][j];
-			while(temp!=NULL){
-				printf("%d ",temp->numer);
-				temp=temp->next;
-			}
-			printf("\n");
-		}
-	}
-    printf("oddziela conv2graph");
     conv2graph(labirynt, width, height, numerstart);
     FILE *metadata=fopen("metadata.txt", "w");
     fprintf(metadata, "%d %d %d %d", height, width, numerstart, numerkoniec);
     fclose(metadata);
-   for(int i=0;i<height;i++){
-		for(int j=0;j<width;j++){
-			temp=&labirynt[i][j];
-			while(temp!=NULL){
-				printf("%d ",temp->numer);
-				temp=temp->next;
-			}
-			printf("\n");
-		}
-	}
+    return labirynt;
 }
