@@ -28,7 +28,7 @@ void enqueue(Q* queue, cell_t cell) {
     queue->cells[queue->size++] = cell;
 }
 
-// Usuwa komorke o najwiekszej calkowitej wadze z konca kolejki
+// Usuwa komorke o najwiekszej calkowitej wadze z poczatku kolejki
 cell_t dequeue(Q* queue) {
     if (queue->size == 0) {
         errorcomm(4);
@@ -61,20 +61,18 @@ void freeQueue(Q* queue) {
     free(queue);
 }
 
-void usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwagonika){
+cell_t **usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwagonika){
     cell_t *curwagon=labirynt[komorkah][komorkaw].next;
     cell_t *replacewagon=NULL;
-    cell_t *tempwagon=NULL;
     while (curwagon!=NULL)
     {
         if(curwagon->numer!=numerwagonika){
-            tempwagon=curwagon;
-            tempwagon->next=replacewagon;
-            replacewagon=tempwagon;
+            append(&replacewagon, curwagon->numer);
         }
         curwagon=curwagon->next;
     }
     labirynt[komorkah][komorkaw].next=replacewagon;
+    return labirynt;
 }
 
 bool isInCell_t(cell_t* cells, int numer) {
@@ -94,9 +92,10 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
     visited.next = NULL;
 
     enqueue(&queue, labirynt[start / width][start % width]);
-
+    printf("removecopies ");
     while(!isQueueEmpty(&queue)){
         cell_t currentCell = dequeue(&queue);
+        printf("%d, ",currentCell.numer);
         cell_t *temp = malloc(sizeof(cell_t));
         temp->numer = visited.numer;
         temp->next = visited.next;
@@ -106,12 +105,14 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
         } else {
             visited.next = NULL;
         }
-        temp=currentCell.next;
+        temp=labirynt[currentCell.numer/width][currentCell.numer%width].next;
         while(temp!=NULL){
             if(isInCell_t(&visited, temp->numer) == 0){
-                usuwaniewagonika(labirynt, temp->numer / width, temp->numer % width, currentCell.numer);
-                if(isInQueue(&queue, labirynt[temp->numer/width][temp->numer%width])==0)
-                    enqueue(&queue, labirynt[temp->numer/width][temp->numer%width]);
+                printf(" w: %d ",temp->numer);
+                labirynt=usuwaniewagonika(labirynt, temp->numer / width, temp->numer % width, currentCell.numer);
+                if(isInQueue(&queue, labirynt[temp->numer/width][temp->numer%width])==0){
+                    printf("enq: %d ",temp->numer);
+                    enqueue(&queue, labirynt[temp->numer/width][temp->numer%width]);}
             }
             temp=temp->next;
         }
