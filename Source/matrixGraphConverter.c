@@ -98,10 +98,16 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
 
     while(!isQueueEmpty(&queue)){
         cell_t currentCell = dequeue(&queue);
-        cell_t *temp=malloc(sizeof(cell_t));
+        cell_t *temp = malloc(sizeof(cell_t));
         temp->numer = visited.numer;
         temp->next = visited.next;
         visited = currentCell;
+        visited.next = temp;
+        if(temp->numer != -1){
+            visited.next = temp;
+        } else {
+            visited.next = NULL;
+        }
     }
 }
 
