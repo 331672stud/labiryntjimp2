@@ -72,12 +72,6 @@ void compRead(char *filename, cell_t **labirynt){
         fread(&separator, sizeof(separator_id), 1, plik);
         fread(&value, sizeof(wall), 1, plik);
         fread(&count, sizeof(path), 1, plik);
-        printf("separator: %d\n", separator);
-        printf("value: %c\n", value);
-        printf("count: %d\n", count);
-        printf("currenth: %d\n", current_height);
-        printf("currentw: %d\n", current_width);
-        printf("_______________________\n");
         for(int i=0;i <= count;i++){
             if(current_height%2==0)
             {
@@ -85,7 +79,6 @@ void compRead(char *filename, cell_t **labirynt){
                 {
                     if(value!=88)
                     {
-                        printf("chujowo2");
                         errorcomm(2);
                         return;
                     }
@@ -108,7 +101,6 @@ void compRead(char *filename, cell_t **labirynt){
                 }
             } //left right pass
             else if(value!=32){
-                    printf("value chujowo: %d\n", value);
                     errorcomm(2);
                     return;
                 }//zawsze komorka
