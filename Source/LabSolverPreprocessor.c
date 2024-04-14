@@ -21,7 +21,7 @@ int main(int argc, char **argv){
 	FILE *metadata=fopen("metadata.txt", "r");
 	if(metadata==NULL){
 		printf("sraniewbanie");	
-		return EXIT_FAILURE
+		return EXIT_FAILURE;
 	}
 	else
 	{
@@ -37,7 +37,7 @@ int main(int argc, char **argv){
 	metadata=fopen("metadata.txt", "a");
 	if(metadata==NULL){
 		printf("sraniewbanie");	
-		return EXIT_FAILURE
+		return EXIT_FAILURE;
 	}
 	else
 	{
