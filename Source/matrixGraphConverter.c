@@ -110,7 +110,7 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
         temp=currentCell.next;
         while(temp!=NULL){
             if(isInCell_t(&visited, temp->numer) == 0){
-                usuwaniewagonika(labirynt, currentCell.numer / width, currentCell.numer % width, temp->numer);
+                usuwaniewagonika(labirynt, temp->numer / width, temp->numer % width, currentCell.numer);
                 if(isInQueue(&queue, labirynt[temp->numer/width][temp->numer%width])==0)
                     enqueue(&queue, labirynt[temp->numer/width][temp->numer%width]);
             }

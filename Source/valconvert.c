@@ -1,4 +1,6 @@
 #include "adjacencyMatrix.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 
 int trueval(int posval){ //numer komorki
