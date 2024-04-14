@@ -92,10 +92,8 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
     visited.next = NULL;
 
     enqueue(&queue, labirynt[start / width][start % width]);
-    printf("removecopies ");
     while(!isQueueEmpty(&queue)){
         cell_t currentCell = dequeue(&queue);
-        printf("%d, ",currentCell.numer);
         cell_t *temp = malloc(sizeof(cell_t));
         temp->numer = visited.numer;
         temp->next = visited.next;
@@ -108,10 +106,8 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
         temp=labirynt[currentCell.numer/width][currentCell.numer%width].next;
         while(temp!=NULL){
             if(isInCell_t(&visited, temp->numer) == 0){
-                printf(" w: %d ",temp->numer);
                 labirynt=usuwaniewagonika(labirynt, temp->numer / width, temp->numer % width, currentCell.numer);
                 if(isInQueue(&queue, labirynt[temp->numer/width][temp->numer%width])==0){
-                    printf("enq: %d ",temp->numer);
                     enqueue(&queue, labirynt[temp->numer/width][temp->numer%width]);}
             }
             temp=temp->next;
