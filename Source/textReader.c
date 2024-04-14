@@ -79,7 +79,7 @@ void StdRead(char *filename, cell_t **labirynt){
                 {
                 case 0: //always a wall
                     if(bufor[j]!='X'){
-                        fprintf(stdout, "%c", bufor[j]);
+                        fprintf(stdout, "%c i: %d j: %d", bufor[j], i , j);
                         errorcomm(2);
                         return;
                     }
@@ -87,6 +87,7 @@ void StdRead(char *filename, cell_t **labirynt){
                 
                 default:
                     if(bufor[j]==' '){
+                        fprintf(stdout, "%c i: %d j: %d", bufor[j], i , j);
                         temp->numer=trueval(i+1)*width+trueval(j);
                         temp->next=labirynt[trueval(i-1)][trueval(j)].next;
                         labirynt[trueval(i-1)][trueval(j)].next=temp;
@@ -103,6 +104,7 @@ void StdRead(char *filename, cell_t **labirynt){
                 {
                 case 0:
                     if(bufor[j]==' '){
+                        fprintf(stdout, "%c i: %d j: %d", bufor[j], i , j);
                         temp->numer=trueval(i)*width+trueval(j+1);
                         temp->next=labirynt[trueval(i)][trueval(j-1)].next;
                         labirynt[trueval(i)][trueval(j-1)].next=temp;
