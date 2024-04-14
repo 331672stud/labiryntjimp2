@@ -77,6 +77,17 @@ void usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwa
     labirynt[komorkah][komorkaw].next=replacewagon;
 }
 
+bool isInCell_t(cell_t* cells, cell_t cell) {
+    cell_t* current = cells->next;
+    while (current != NULL) {
+        if (current->numer == cell.numer) {
+            return true;
+        }
+        current = current->next;
+    }
+    return false;
+}
+
 void removecopies(cell_t **labirynt, int width, int height, int start){
     // int startheight=start/width;
     // int startwidth=start%width;
@@ -107,6 +118,10 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
             visited.next = temp;
         } else {
             visited.next = NULL;
+        }
+        temp = currentCell.next;
+        while(temp != NULL){
+            if(temp->numer )
         }
     }
 }
