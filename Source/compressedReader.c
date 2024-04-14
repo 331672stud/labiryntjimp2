@@ -6,12 +6,12 @@
 #include "matrixGraphConverter.h"
 
 
-void compRead(char *filename, cell_t **labirynt){
+cell_t **compRead(char *filename, cell_t **labirynt){
     
     FILE *plik = fopen(filename, "rb");
     if(plik==NULL){
         errorcomm(0);
-        return;
+        return NULL;
     }
     
     unsigned char file_id[4];
@@ -41,7 +41,7 @@ void compRead(char *filename, cell_t **labirynt){
     labirynt = malloc(height * sizeof(cell_t*));
     if (labirynt == NULL) {
         errorcomm(3);
-        return;
+        return NULL;
     }
     int width = trueval(columns);
     for(int i = 0; i < height; i++){
@@ -60,7 +60,7 @@ void compRead(char *filename, cell_t **labirynt){
     cell_t *temp = malloc(sizeof(cell_t));
     if (temp == NULL) {
         errorcomm(3);
-        return;
+        return NULL;
     }
 
     temp->numer = 0;
@@ -80,7 +80,7 @@ void compRead(char *filename, cell_t **labirynt){
                     if(value!=88)
                     {
                         errorcomm(2);
-                        return;
+                        return NULL;
                     }
                 }else if(value==32){
                     append(&labirynt[trueval(current_height-1)][trueval(current_width)].next, trueval(current_height+1)*width+trueval(current_width));
@@ -94,7 +94,7 @@ void compRead(char *filename, cell_t **labirynt){
             } //left right passfor(int i=0;i<height;i++){
             else if(value!=32){
                     errorcomm(2);
-                    return;
+                    return NULL;
                 }//zawsze komorka
             current_width++;
             if(current_width==columns){
@@ -103,8 +103,9 @@ void compRead(char *filename, cell_t **labirynt){
             }    
         }
     }
-    conv2graph(labirynt, width, height, nrstart);
+    //conv2graph(labirynt, width, height, nrstart);
     FILE *metadata=fopen("metadata.txt", "w");
     fprintf(metadata, "%d %d %d %d", height, width, nrstart, nrkoniec);
     fclose(metadata);
+    return labirynt;
 }

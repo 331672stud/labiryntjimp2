@@ -19,11 +19,10 @@ void findbranch(cell_t **labirynt, int width, int height, int start, char *resul
             if(labirynt[numerkomorki/width][numerkomorki%width].next->next==NULL){
                 append(&branch, numerkomorki);
                 numerkomorki=labirynt[numerkomorki/width][numerkomorki%width].next->numer;
-                }
-                else{
-                    append(&branch, numerkomorki);
-                    break;
-                }
+            } else{
+                append(&branch, numerkomorki);
+                break;
+            }
         }
         if(labirynt[numerkomorki/width][numerkomorki%width].next==NULL){
             append(&branch, numerkomorki);
@@ -41,6 +40,7 @@ void findbranch(cell_t **labirynt, int width, int height, int start, char *resul
         } 
         numerpliku++;
         branchstarts=branchstarts->next;
+        branch->next=NULL;
     }
 }
 

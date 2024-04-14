@@ -25,8 +25,9 @@ void append( cell_t **list, int val)
         *list = new;
         return;
     }
+    else{
     while (last->next != NULL) {
         last = last->next;
     }
-    last->next = new;
+    last->next = new;}
 }

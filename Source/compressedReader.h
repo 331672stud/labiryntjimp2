@@ -3,6 +3,6 @@
 #include "adjacencyMatrix.h"
 
 
-void compRead(char *filename, cell_t **labirynt);
+cell_t **compRead(char *filename, cell_t **labirynt);
 
 #endif
