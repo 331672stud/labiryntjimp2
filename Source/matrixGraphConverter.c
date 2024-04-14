@@ -87,18 +87,7 @@ bool isInCell_t(cell_t* cells, int numer) {
 }
 
 void removecopies(cell_t **labirynt, int width, int height, int start){
-    // int startheight=start/width;
-    // int startwidth=start%width;
-    // cell_t currentcell=labirynt[startheight][startwidth];
-    // cell_t *connections=currentcell.next;
-    // while(connections!=NULL){
-    //     usuwaniewagonika(labirynt, connections->numer/width, connections->numer%width, start);
-    //     removecopies(labirynt, width, height, connections->numer);
-    //     connections=connections->next;
-    // }
-
     Q queue = initQ(height, width);
-    Q queueNext = initQ(height, width);
     cell_t visited;
     visited.numer = -1;
     visited.next = NULL;
@@ -120,18 +109,12 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
         temp=currentCell.next;
         while(temp!=NULL)
             if(isInCell_t(&visited, temp->numer) == 0){
-                usuwaniewagonika(labirynt, temp->numer / width, temp->numer % width, currentCell.numer);
-                if(isInQueue(&queueNext, labirynt[temp->numer/width][temp->numer%width])==0)
-                    enqueue(&queueNext, labirynt[temp->numer/width][temp->numer%width]);
+                usuwaniewagonika(labirynt, currentCell.numer / width, currentCell.numer % width, temp->numer);
+                if(isInQueue(&queue, labirynt[temp->numer/width][temp->numer%width])==0)
+                    enqueue(&queue, labirynt[temp->numer/width][temp->numer%width]);
             }
-        if(isQueueEmpty(&queue) && !isQueueEmpty(&queueNext))
-        {
-            queue=queueNext;
-            queueNext=initQ(height, width);
-        }
     }
     freeQueue(&queue);
-    freeQueue(&queueNext);
 }
 
 void conv2graph(cell_t **labirynt, int width, int height, int start){

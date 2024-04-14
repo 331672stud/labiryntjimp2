@@ -79,11 +79,14 @@ void compRead(char *filename, cell_t **labirynt){
         fread(&count, sizeof(path), 1, plik);
         for(int i=0;i<count;i++){
             if(current_height%2==0)
+            {
                 if(current_width%2==0) //always a wall
+                {
                     if(value!=58){
                         errorcomm(2);
                         return;
                     }
+                }    
                 else if(value==20){
                         temp->numer=trueval(current_height+1)*width+trueval(current_width);
                         temp->next=labirynt[trueval(current_height-1)][trueval(current_width)].next;
@@ -92,6 +95,7 @@ void compRead(char *filename, cell_t **labirynt){
                         temp->next=labirynt[trueval(current_height+1)][trueval(current_width)].next;
                         labirynt[trueval(current_height+1)][trueval(current_width)].next=temp;                    
                 } //up down pass
+            }    
             else if(current_width%2==0 && value==20){
                 temp->numer=trueval(current_height)*width+trueval(current_width+1);
                 temp->next=labirynt[trueval(current_height)][trueval(current_width-1)].next;

@@ -7,7 +7,7 @@
 #include "matrixGraphConverter.h"
 
 
-void StdRead(char *filename, cell_t **labirynt){
+void StdRead(char *filename, cell_t **labirynt){//działa
     FILE *plik=fopen(filename, "r");
     if(plik==NULL){
         errorcomm(0);
@@ -50,46 +50,40 @@ void StdRead(char *filename, cell_t **labirynt){
     cell_t *temp = malloc(sizeof(cell_t));
     temp->numer=0;
     temp->next=NULL;
-    for(int i=0;i<posval(height);i++){
-        fprintf(stdout, "\n");
-        fgets(bufor,2050,plik);
-        for(int j=0;j<posval(width);j++){
-            int imod=i%2;
-            int jmod=j%2;
-            fprintf(stdout, "%c", bufor[j]);
-            if(bufor[j]=='P' || bufor[j]=='K')
+    for(int i=0;i<posval(height);i++)
+    {
+        fgets(bufor,posval(width)+2,plik);
+        for(int j=0;j<posval(width);j++)
+        {
+            if(bufor[j]=='P' || bufor[j]=='K'){
                 if(bufor[j]=='P'){
                     if(i==0){
                         numerstart=trueval(j);
                     }
                     else{
-                        numerstart=trueval(i)+1;
+                        numerstart=trueval(i+1);
                     }
                 }
                 else{
-                    if(i==posval(height)-1){
+                    if(i==posval(height)){
                         numerkoniec=trueval(i-1)*width+trueval(j);
                     }
                     else{
-                        numerkoniec=trueval(i)*width+trueval(j)-1;
+                        numerkoniec=trueval(i)*width+trueval(j-1);
                     }
                 }
-            else switch (imod)
+            } else if (i%2==0)
             {
-            case 0:
-                switch (jmod)
+                if (j%2==0)
                 {
-                case 0: //always a wall
+                //always a wall 
                     if(bufor[j]!='X'){
-                        fprintf(stdout, "%c i: %d j: %d", bufor[j], i , j);
                         errorcomm(2);
                         return;
                     }
-                    break;
-                
-                default:
-                    if(bufor[j]==' ' && i>2 && i<posval(height)){
-                        fprintf(stdout, "%c i: %d j: %d", bufor[j], i , j);
+                }
+                else{             
+                    if(bufor[j]==' '){
                         temp->numer=trueval(i+1)*width+trueval(j);
                         temp->next=labirynt[trueval(i-1)][trueval(j)].next;
                         labirynt[trueval(i-1)][trueval(j)].next=temp;
@@ -97,34 +91,26 @@ void StdRead(char *filename, cell_t **labirynt){
                         temp->next=labirynt[trueval(i+1)][trueval(j)].next;
                         labirynt[trueval(i+1)][trueval(j)].next=temp; 
                     } //up down pass
-                    break;
-                }
-                break;
-            
-            default:
-                switch (jmod)
+                } 
+            }else
+            {
+                if (j%2==0)
                 {
-                case 0:
-                    if(bufor[j]==' ' && j>0 && j<posval(width)){
-                        fprintf(stdout, "%c i: %d j: %d", bufor[j], i , j);
+                    if(bufor[j]==' '){
                         temp->numer=trueval(i)*width+trueval(j+1);
                         temp->next=labirynt[trueval(i)][trueval(j-1)].next;
                         labirynt[trueval(i)][trueval(j-1)].next=temp;
                         temp->numer-=1;
                         temp->next=labirynt[trueval(i)][trueval(j+1)].next;
                         labirynt[trueval(i)][trueval(j+1)].next=temp;
-                    } //left right pass
-                    break;
-                
-                default:
+                    } //left right pass                
+                } else
+                {
                     if(bufor[j]!=' '){//always cell
-                        fprintf(stdout, "%c i: %d j: %d", bufor[j], i , j);
                         errorcomm(2);
                         return;
                     }
-                    break;
                 }
-                break;
             }
         }
     }
