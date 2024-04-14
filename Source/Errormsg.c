@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 
-void errorcom(int code){
+void errorcomm(int code){
     switch (code)
     {
         case 0:

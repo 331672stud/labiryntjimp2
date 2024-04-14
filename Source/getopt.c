@@ -20,8 +20,8 @@ void parsearg(int argc, char **argv, char *optstring, char **filename, char **re
                 *resultname = optarg;
                 break;
             default:
-                fprintf(stderr, "Nieznana flaga", argv[0]);
-                return 1; 
+                fprintf(stderr, "Nieznana flaga: %s\n", argv[0]);
+                return; 
         }
     }
 }
