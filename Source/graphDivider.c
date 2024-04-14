@@ -8,8 +8,7 @@ void findbranch(cell_t **labirynt, int width, int height, int start, char *resul
     int startheight=start/width;
     int startwidth=start%width;
     cell_t *branch=malloc(sizeof(cell_t));
-    branch->numer=labirynt[startheight][startwidth].numer;
-    branch->next=labirynt[startheight][startwidth].next;
+    branch=&labirynt[startheight][startwidth];
     cell_t *branchstarts=branch->next;
     int numerkomorki;
     int numerpliku=0;
@@ -20,10 +19,11 @@ void findbranch(cell_t **labirynt, int width, int height, int start, char *resul
             if(labirynt[numerkomorki/width][numerkomorki%width].next->next==NULL){
                 append(&branch, numerkomorki);
                 numerkomorki=labirynt[numerkomorki/width][numerkomorki%width].next->numer;
-            } else{
-                append(&branch, numerkomorki);
-                break;
-            }
+                }
+                else{
+                    append(&branch, numerkomorki);
+                    break;
+                }
         }
         if(labirynt[numerkomorki/width][numerkomorki%width].next==NULL){
             append(&branch, numerkomorki);
@@ -41,7 +41,6 @@ void findbranch(cell_t **labirynt, int width, int height, int start, char *resul
         } 
         numerpliku++;
         branchstarts=branchstarts->next;
-        branch->next=NULL;
     }
 }
 
