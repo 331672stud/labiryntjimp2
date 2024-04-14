@@ -94,7 +94,7 @@ void compRead(char *filename, cell_t **labirynt){
                         temp->next=labirynt[trueval(current_height+1)][trueval(current_width)].next;
                         labirynt[trueval(current_height+1)][trueval(current_width)].next=temp;                    
                 } //up down pass
-            }else if(current_width%2==0 && value==32){
+            }else if(current_width%2==0){
                 temp->numer=trueval(current_height)*width+trueval(current_width+1);
                 temp->next=labirynt[trueval(current_height)][trueval(current_width-1)].next;
                 labirynt[trueval(current_height)][trueval(current_width-1)].next=temp;

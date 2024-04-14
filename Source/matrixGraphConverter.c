@@ -72,6 +72,7 @@ void usuwaniewagonika(cell_t **labirynt, int komorkah, int komorkaw, int numerwa
             tempwagon->next=replacewagon;
             replacewagon=tempwagon;
         }
+        curwagon=curwagon->next;
     }
     labirynt[komorkah][komorkaw].next=replacewagon;
 }
@@ -107,14 +108,15 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
             visited.next = NULL;
         }
         temp=currentCell.next;
-        while(temp!=NULL)
+        while(temp!=NULL){
             if(isInCell_t(&visited, temp->numer) == 0){
                 usuwaniewagonika(labirynt, currentCell.numer / width, currentCell.numer % width, temp->numer);
                 if(isInQueue(&queue, labirynt[temp->numer/width][temp->numer%width])==0)
                     enqueue(&queue, labirynt[temp->numer/width][temp->numer%width]);
             }
+            temp=temp->next;
+        }
     }
-    freeQueue(&queue);
 }
 
 void conv2graph(cell_t **labirynt, int width, int height, int start){
