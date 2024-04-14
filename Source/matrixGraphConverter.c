@@ -2,6 +2,7 @@
 #include "valconvert.h"
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include "Errormsg.h"
 
 typedef struct Q {
@@ -15,7 +16,7 @@ Q initQ(int height, int width){
     queue.cells = malloc(height * width *sizeof(cell_t));
     if (queue.cells == NULL) {
         errorcomm(3);
-        return;
+        return queue;
     }
     queue.size = 0;
     queue.maxSize = height * width;
@@ -31,7 +32,6 @@ void enqueue(Q* queue, cell_t cell) {
 cell_t dequeue(Q* queue) {
     if (queue->size == 0) {
         errorcomm(4);
-        return;
     }
     cell_t cell = queue->cells[0];
     for (int i = 0; i < queue->size - 1; i++) {
@@ -120,7 +120,7 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
         temp=currentCell.next;
         while(temp!=NULL)
             if(isInCell_t(&visited, temp->numer) == 0){
-                usuwaniewagonika(labirynt, temp->numer / width, temp->numer % width, currentCell.next);
+                usuwaniewagonika(labirynt, temp->numer / width, temp->numer % width, currentCell.numer);
                 if(isInQueue(&queueNext, labirynt[temp->numer/width][temp->numer%width])==0)
                     enqueue(&queueNext, labirynt[temp->numer/width][temp->numer%width]);
             }
