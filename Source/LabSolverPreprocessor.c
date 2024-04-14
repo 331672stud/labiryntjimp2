@@ -14,22 +14,14 @@ int main(int argc, char **argv){
 	parsearg(argc, argv, optstring, &filename, &resultname); //getopt.h (getopt), assigns last two
 	cell_t **labirynt;
 	if(strstr(filename, ".bin")!=NULL)
-		compRead(filename, labirynt);
+		labirynt=compRead(filename, labirynt);
 	else
 		labirynt=StdRead(filename, labirynt);
 	int height, width, pocz, kon;
 	FILE *metadata=fopen("metadata.txt", "r");
 	cell_t *temp = malloc(sizeof(cell_t));
-	/*for(int i=0;i<height;i++){
-		for(int j=0;j<width;j++){
-			temp=&labirynt[i][j];
-			while(temp!=NULL){
-				printf("%d",temp->numer);
-				temp=temp->next;
-			}
-			printf("\n");
-		}
-	}*/
+	temp = NULL;
+
 	if(metadata==NULL){
 		printf("brak pliku");	
 		return EXIT_FAILURE;

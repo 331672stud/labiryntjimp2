@@ -6,12 +6,12 @@
 #include "matrixGraphConverter.h"
 
 
-cell_t **compRead(char *filename, cell_t **labirynt){
+void compRead(char *filename, cell_t **labirynt){
     
     FILE *plik = fopen(filename, "rb");
     if(plik==NULL){
         errorcomm(0);
-        return NULL;
+        return;
     }
     
     unsigned char file_id[4];
@@ -41,7 +41,7 @@ cell_t **compRead(char *filename, cell_t **labirynt){
     labirynt = malloc(height * sizeof(cell_t*));
     if (labirynt == NULL) {
         errorcomm(3);
-        return NULL;
+        return;
     }
     int width = trueval(columns);
     for(int i = 0; i < height; i++){
@@ -51,16 +51,17 @@ cell_t **compRead(char *filename, cell_t **labirynt){
         for(int j = 0; j < width; j++){
             labirynt[i][j].numer = i * width + j;
             labirynt[i][j].next = NULL;
+            printf("%d\n", labirynt[i][j].numer);
         }
     }
-    
+    printf("%d\n", labirynt[0][0].numer);
     int nrstart = (trueval(entry_y - 1) * trueval(columns) + trueval(entry_x)) - 1;
     int nrkoniec = (trueval(exit_y - 1) * trueval(columns) + trueval(exit_x)) - 1;
 
     cell_t *temp = malloc(sizeof(cell_t));
     if (temp == NULL) {
         errorcomm(3);
-        return NULL;
+        return;
     }
 
     temp->numer = 0;
@@ -72,6 +73,10 @@ cell_t **compRead(char *filename, cell_t **labirynt){
         fread(&separator, sizeof(separator_id), 1, plik);
         fread(&value, sizeof(wall), 1, plik);
         fread(&count, sizeof(path), 1, plik);
+        //printf("Current Height: %d, Current Width: %d\n", current_height, current_width);
+        //printf("Separator: %d\n", separator);
+        //printf("Value: %d\n", value);
+        //printf("Count: %d\n", count);
         for(int i=0;i <= count;i++){
             if(current_height%2==0)
             {
@@ -80,21 +85,29 @@ cell_t **compRead(char *filename, cell_t **labirynt){
                     if(value!=88)
                     {
                         errorcomm(2);
-                        return NULL;
+                        return;
                     }
                 }else if(value==32){
-                    append(&labirynt[trueval(current_height-1)][trueval(current_width)].next, trueval(current_height+1)*width+trueval(current_width));
-                    append(&labirynt[trueval(current_height+1)][trueval(current_width)].next, trueval(current_height-1)*width+trueval(current_width)); 
+                    temp->numer=trueval(current_height+1)*width+trueval(current_width);
+                    temp->next=labirynt[trueval(current_height-1)][trueval(current_width)].next;
+                    labirynt[trueval(current_height-1)][trueval(current_width)].next=temp;
+                    temp->numer-=width;
+                    temp->next=labirynt[trueval(current_height+1)][trueval(current_width)].next;
+                    labirynt[trueval(current_height+1)][trueval(current_width)].next=temp; 
                 } //up down pass
             }else if(current_width%2==0){
                 if(value==32){
-                    append(&labirynt[trueval(current_height)][trueval(current_width-1)].next, trueval(current_height)*width+trueval(current_height+1));
-                    append(&labirynt[trueval(current_height)][trueval(current_width+1)].next, trueval(current_height)*width+trueval(current_width-1));
+                    temp->numer=trueval(current_height)*width+trueval(current_width+1);
+                    temp->next=labirynt[trueval(current_height)][trueval(current_width-1)].next;
+                    labirynt[trueval(current_height)][trueval(current_width-1)].next=temp;
+                    temp->numer-=1;
+                    temp->next=labirynt[trueval(current_height)][trueval(current_width+1)].next;
+                    labirynt[trueval(current_height)][trueval(current_width+1)].next=temp;
                 }
             } //left right passfor(int i=0;i<height;i++){
             else if(value!=32){
                     errorcomm(2);
-                    return NULL;
+                    return;
                 }//zawsze komorka
             current_width++;
             if(current_width==columns){
@@ -103,9 +116,19 @@ cell_t **compRead(char *filename, cell_t **labirynt){
             }    
         }
     }
-    //conv2graph(labirynt, width, height, nrstart);
+    conv2graph(labirynt, width, height, nrstart);
     FILE *metadata=fopen("metadata.txt", "w");
     fprintf(metadata, "%d %d %d %d", height, width, nrstart, nrkoniec);
     fclose(metadata);
-    return labirynt;
+    cell_t *tempp = malloc(sizeof(cell_t));
+    for(int i=0;i<height;i++){
+		for(int j=0;j<width;j++){
+			tempp=&labirynt[i][j];
+			while(tempp!=NULL){
+				printf("%d",tempp->numer);
+				tempp=tempp->next;
+			}
+			printf("\n");
+		}
+	}
 }
