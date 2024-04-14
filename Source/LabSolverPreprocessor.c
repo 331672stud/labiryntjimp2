@@ -20,7 +20,7 @@ int main(int argc, char **argv){
 	int height, width, pocz, kon;
 	FILE *metadata=fopen("metadata.txt", "r");
 	cell_t *temp;
-	/*if(metadata==NULL){
+	if(metadata==NULL){
 		printf("sraniewbanie");	
 		return EXIT_FAILURE;
 	}
@@ -45,6 +45,6 @@ int main(int argc, char **argv){
 		fscanf(metadata, " %d", &firstcount);
 		fclose(metadata);
 	}
-	//divide(labirynt, resultname, height, width, pocz);*/
+	divide(labirynt, resultname, height, width, pocz);
 	return 0;
 }
