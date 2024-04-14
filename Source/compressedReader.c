@@ -72,17 +72,13 @@ void compRead(char *filename, cell_t **labirynt){
         fread(&separator, sizeof(separator_id), 1, plik);
         fread(&value, sizeof(wall), 1, plik);
         fread(&count, sizeof(path), 1, plik);
-        printf("separator: %d\n", separator);
-        printf("value: %c\n", value);
-        printf("count: %d\n", count);
-        for(int i=0;i<count;i++){
+        for(int i=0;i <= count;i++){
             if(current_height%2==0)
             {
                 if(current_width%2==0) //always a wall
                 {
                     if(value!=88)
                     {
-                        printf("chujowo2");
                         errorcomm(2);
                         return;
                     }
@@ -95,15 +91,25 @@ void compRead(char *filename, cell_t **labirynt){
                         labirynt[trueval(current_height+1)][trueval(current_width)].next=temp;                    
                 } //up down pass
             }else if(current_width%2==0){
+<<<<<<< HEAD
                 temp->numer=trueval(current_height)*width+trueval(current_width+1);
                 temp->next=labirynt[trueval(current_height)][trueval(current_width-1)].next;
                 labirynt[trueval(current_height)][trueval(current_width-1)].next=temp;
                 temp->numer-=1;
                 temp->next=labirynt[trueval(current_height)][trueval(current_width+1)].next;
                 labirynt[trueval(current_height)][trueval(current_width+1)].next=temp;
+=======
+                if(value==32){
+                    temp->numer=trueval(current_height)*width+trueval(current_width+1);
+                    temp->next=labirynt[trueval(current_height)][trueval(current_width-1)].next;
+                    labirynt[trueval(current_height)][trueval(current_width-1)].next=temp;
+                    temp->numer-=1;
+                    temp->next=labirynt[trueval(current_height)][trueval(current_width+1)].next;
+                    labirynt[trueval(current_height)][trueval(current_width+1)].next=temp;
+                }
+>>>>>>> 7016ab4eeeddd9f861d2b4e2591ad3bee358afee
             } //left right pass
             else if(value!=32){
-                    printf("value chujowo: %d\n", value);
                     errorcomm(2);
                     return;
                 }//zawsze komorka
