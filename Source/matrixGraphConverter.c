@@ -117,6 +117,9 @@ void removecopies(cell_t **labirynt, int width, int height, int start){
         } else {
             visited.next = NULL;
         }
+        if(isInCell_t(&visited, currentCell.numer) == 0){
+            usuwaniewagonika(labirynt, currentCell.numer / width, currentCell.numer % width, start);
+        }
     }
 }
 
