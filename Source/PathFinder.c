@@ -74,7 +74,7 @@ void recursiveRead(uint16_t height, uint16_t width, int pocz, int kon, uint8_t i
         else{
             czydoprintu=isEnd(lista, kon, filename);
             if(czydoprintu)
-                printList(lista, kon, zapis);
+                printList(lista, kon, resultname, zapis);
         }
     } else for(int i=0;i<ilep0;i++){
         Listappend(&lista, pocz, i);
@@ -86,7 +86,7 @@ void recursiveRead(uint16_t height, uint16_t width, int pocz, int kon, uint8_t i
         else{
             czydoprintu=isEnd(lista, kon, filename);
             if(czydoprintu)
-                printList(lista, kon, zapis);
+                printList(lista, kon, resultname ,zapis);
         }
         deappend(&lista);
     }
