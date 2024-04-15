@@ -42,14 +42,14 @@ void writePath(list_t *lista, int kon, char *resultname, char *zapis){
     while(lista!=NULL){
         snprintf(filename, 64, "%s%d_%d.txt", resultname, lista->nrkom, lista->nrpliku);
         plik_read=fopen(filename, "r");
-        fscanf(plik_read, "%c %d", &nrkom, &flag);
+        fscanf(plik_read, "%c %d", &flag, &nrkom);
         czyrun=0;
         while(flag!='_' && czyrun==0)
         {
             switch (lflag)
             {
             case '?':
-                frprintf(plik_wyn, "START\n");
+                fprintf(plik_wyn, "START\n");
                 nrkoml=nrkom;
                 lflag=flag;
                 break;
@@ -68,10 +68,11 @@ void writePath(list_t *lista, int kon, char *resultname, char *zapis){
                 }
                 break;
             }
+            fscanf(plik_read, "%c %d", &flag, &nrkom);
         }
         fclose(plik_read);
         lista=lista->next;
     }
-    fprinf(plik_wyn, "STOP");
+    fprintf(plik_wyn, "STOP");
     fclose(plik_wyn);
 }
