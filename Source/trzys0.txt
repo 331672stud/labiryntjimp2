@@ -1,10 +1,6 @@
 START
-GO !
 GO v
-GO !
 GO >
-GO !
 GO >
-GO !
 GO v
 STOP

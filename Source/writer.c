@@ -27,8 +27,47 @@ char returndir(int roznica){
     return '!';
 }
 
+void printfile(char *filename, FILE **wynik, int kon){
+    int nrkom;
+    char flag='n';
+    int lastkom=0;
+    char lflag='?';//first
+    char dir;
+    int czyrun=0;
+    FILE *plik_read=fopen(filename, "r");
+    if(plik_read==NULL){
+        printf("nie udalo sie otworzyc pliku read %s", filename);
+        return; 
+    }
+    fscanf(plik_read, "%c %d ", &flag, &nrkom);
+    while(flag=='n' && czyrun==0)
+    {
+        switch (lflag)
+        {
+            case '?':
+                lastkom=nrkom;
+                lflag=flag;
+                break;
+            case 'n':
+                if(nrkom!=kon){
+                    fprintf(*wynik, "GO %c\n", returndir(lastkom-nrkom));
+                    lastkom=nrkom;
+                    lflag=flag;
+                } else{
+                    fprintf(*wynik, "GO %c\n", returndir(lastkom-nrkom));
+                    lastkom=nrkom;
+                    lflag=flag;
+                    czyrun=1;
+                }
+                break;
+        }
+        fscanf(plik_read, "%c %d ", &flag, &nrkom);
+    }
+    fclose(plik_read);
+}
+
 void writePath(list_t *lista, int kon, char *resultname, char *zapis){
-    char *filename=malloc(64);
+    char *filename=malloc(64); 
     snprintf(filename, 64, "%s%d.txt", zapis, nrsciezki);
     nrsciezki++;
     FILE *plik_wyn=fopen(filename, "w");
@@ -36,48 +75,10 @@ void writePath(list_t *lista, int kon, char *resultname, char *zapis){
         printf("nie udalo sie otworzyc pliku wynikowego");
         return;
     }
-    int nrkom;
-    char flag;
-    int nrkoml;
-    char lflag='?';
-    char dir;
-    int czyrun=0;
+    fprintf(plik_wyn, "START\n");
     while(lista!=NULL){
         snprintf(filename, 64, "%s%d_%d.txt", resultname, lista->nrkom, lista->nrpliku);
-        FILE *plik_read=fopen(filename, "r");
-        if(plik_read==NULL){
-            printf("nie udalo sie otworzyc pliku read %s", filename);
-            return;    
-        }
-        fscanf(plik_read, "%c %d", &flag, &nrkom);
-        czyrun=0;
-        while(flag!='_' && czyrun==0)
-        {
-            switch (lflag)
-            {
-            case '?':
-                fprintf(plik_wyn, "START\n");
-                nrkoml=nrkom;
-                lflag=flag;
-                break;
-            case '_':
-                nrkoml=nrkom;
-                lflag=flag;
-                break;
-            default:
-                if(nrkom!=kon){
-                    fprintf(plik_wyn, "GO %c\n", returndir(nrkoml-nrkom));
-                    nrkoml=nrkom;
-                    lflag=flag;
-                } else{
-                    fprintf(plik_wyn, "GO %c\n", returndir(nrkoml-nrkom));
-                    czyrun=1;
-                }
-                break;
-            }
-            fscanf(plik_read, "%c %d", &flag, &nrkom);
-        }
-        fclose(plik_read);
+        printfile(filename, &plik_wyn, kon);      
         lista=lista->next;
     }
     fprintf(plik_wyn, "STOP");
