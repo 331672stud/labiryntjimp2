@@ -6,7 +6,7 @@
 
 
 
-void parsearg(int argc, char **argv, char *optstring, char **filename, char **resultname, int isHelp){
+int parsearg(int argc, char **argv, char *optstring, char **filename, char **resultname, int isHelp){
     int opt;
     while((opt = getopt(argc, argv, optstring)) != -1){
         switch(opt){
@@ -42,7 +42,8 @@ void parsearg(int argc, char **argv, char *optstring, char **filename, char **re
                 break;
             default:
                 fprintf(stderr, "Nieznana flaga: %s, -h for help\n", argv[0]);
-                return; 
+                return 1; 
         }
     }
+    return isHelp;
 }

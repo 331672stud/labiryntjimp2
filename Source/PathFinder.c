@@ -10,10 +10,10 @@ uint8_t countnext(char *filename){ //zwraca liczbe plikow wychodzacych z branch
     FILE *plik=fopen(filename, "r");
     int komorka;
     char flag;
-    fscanf(plik, "%c", flag);
+    fscanf(plik, "%c", &flag);
     while(flag!='_')
-        fscanf(plik, "%d %c", komorka, flag);
-    scanf(plik, "%d", count);
+        fscanf(plik, "%d %c", &komorka, &flag);
+    fscanf(plik, "%d", &count);
     fclose(plik);
     return count;
 }
@@ -22,9 +22,9 @@ int lastcell(char *filename){ //zwraca ostatnia komorke w pliku
     FILE *plik=fopen(filename, "r");
     int komorka;
     char flag;
-    fscanf(plik, "%c", flag);
+    fscanf(plik, "%c", &flag);
     while(flag!='_')
-        fscanf(plik, "%d %c", komorka, flag);
+        fscanf(plik, "%d %c", &komorka, &flag);
     fclose(plik);
     return komorka;
 }
@@ -48,19 +48,19 @@ bool isEnd(list_t *lista, int kon, char *filename){ //sprawdza czy w ostatnim pl
     FILE *plik=fopen(resultname, "r");
     char flag;
     int nrkom;
-    fscanf(plik, "%c %d", flag, nrkom);
+    fscanf(plik, "%c %d", &flag, &nrkom);
     while(flag!='_'){
         if(nrkom==kon){
             fclose(plik);
             return true;
         }
-        fscanf(plik, "%c %d", flag, nrkom);
+        fscanf(plik, "%c %d", &flag, &nrkom);
     }
     fclose(plik);
     return false;
 }
 
-void recursiveRead(uint16_t height, uint16_t width, int pocz, int kon, uint8_t ilep0, char *filename, list_t *lista, char *zapis){
+void recursiveRead(int pocz, int kon, uint8_t ilep0, char *filename, list_t *lista, char *zapis){
     char *resultname = malloc(64);
     uint8_t branchcount;
     bool czydoprintu;
@@ -69,7 +69,7 @@ void recursiveRead(uint16_t height, uint16_t width, int pocz, int kon, uint8_t i
         snprintf(resultname, 64, "%s%d_%d.txt", filename, pocz, ilep0);
         branchcount=countnext(resultname);
         if(branchcount!=0){
-            recursiveRead(height, width, lastcell(resultname), kon, branchcount, filename, lista, zapis);
+            recursiveRead(lastcell(resultname), kon, branchcount, filename, lista, zapis);
         }
         else{
             czydoprintu=isEnd(lista, kon, filename);
@@ -81,7 +81,7 @@ void recursiveRead(uint16_t height, uint16_t width, int pocz, int kon, uint8_t i
         snprintf(resultname, 64, "%s%d_%d.txt", filename, pocz, i);
         branchcount=countnext(resultname);
         if(branchcount!=0){
-            recursiveRead(height, width, lastcell(resultname), kon, branchcount, filename, lista, zapis);
+            recursiveRead(lastcell(resultname), kon, branchcount, filename, lista, zapis);
         }
         else{
             czydoprintu=isEnd(lista, kon, filename);
@@ -92,8 +92,8 @@ void recursiveRead(uint16_t height, uint16_t width, int pocz, int kon, uint8_t i
     }
 }
 
-void convRead(uint16_t height, uint16_t width, int pocz, int kon, uint8_t ilep0, char *filename, char *zapis){
+void convRead(int pocz, int kon, uint8_t ilep0, char *filename, char *zapis){
     list_t *lista=malloc(sizeof(list_t));
-    recursiveRead(height, width, pocz, kon, ilep0, filename, lista, zapis);
+    recursiveRead(pocz, kon, ilep0, filename, lista, zapis);
     
 }

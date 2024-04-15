@@ -42,7 +42,7 @@ void writePath(list_t *lista, int kon, char *resultname, char *zapis){
     while(lista!=NULL){
         snprintf(filename, 64, "%s%d_%d.txt", resultname, lista->nrkom, lista->nrpliku);
         plik_read=fopen(filename, "r");
-        fscanf(plik_read, "%c %d", nrkom, flag);
+        fscanf(plik_read, "%c %d", &nrkom, &flag);
         czyrun=0;
         while(flag!='_' && czyrun==0)
         {
