@@ -1,5 +1,5 @@
+#include "FileList.h"
 
-
-
-void writePath(char *resultname){
+void writePath(list_t *lista, int kon, char *zapis){
+    
 }

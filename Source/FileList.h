@@ -1,3 +1,5 @@
+#ifndef LIST_H
+#define LIST_H
 #include <stdint.h>
 #include <stdlib.h>
 
@@ -9,3 +11,7 @@ typedef struct lista{
 }list_t;
 
 void Listappend( list_t **list, int nrkom, uint8_t nrpliku);
+
+void deappend( list_t **list);
+
+#endif

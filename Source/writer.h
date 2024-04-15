@@ -1,4 +1,7 @@
+#ifndef WRITER_H
+#define WRITER_H
+#include "FileList.h"
 
+void writePath(list_t *lista, int kon, char *zapis);
 
-
-void writePath(char *resultname);
+#endif
