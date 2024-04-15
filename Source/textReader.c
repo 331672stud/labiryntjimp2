@@ -41,7 +41,6 @@ cell_t **StdRead(char *filename, cell_t **labirynt){//działa
         for(int j=0;j<width;j++){
             labirynt[i][j].numer=i*width+j; //cell number
             labirynt[i][j].next=NULL;
-            printf("%d\n", labirynt[i][j].numer);
         }
     }//wyzerowana lista
     rewind(plik);
