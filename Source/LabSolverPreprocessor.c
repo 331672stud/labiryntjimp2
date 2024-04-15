@@ -11,7 +11,11 @@
 int main(int argc, char **argv){
 	char *filename=malloc(64);
 	char *resultname=malloc(64);
-	parsearg(argc, argv, optstring, &filename, &resultname); //getopt.h (getopt), assigns last two
+	int isHelp = 0;
+	parsearg(argc, argv, optstring, &filename, &resultname, isHelp); //getopt.h (getopt), assigns last two
+	if(isHelp = 1){
+		return EXIT_SUCCESS;
+	}
 	cell_t **labirynt;
 	if(strstr(filename, ".bin")!=NULL)
 		labirynt=compRead(filename, labirynt);
