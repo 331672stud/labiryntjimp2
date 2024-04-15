@@ -21,6 +21,6 @@ int main(int argc, char **argv){
 	uint8_t ilep0;
 	fscanf(metadata, "%d %d %d %d %d", height, width, pocz, kon, ilep0);
 	fclose(metadata);
-    convRead(ilep0, width, height, filename, pocz, kon, resultname);
+    convRead(height, width, pocz, kon, ilep0, filename, resultname);
 	return EXIT_SUCCESS;
 }
