@@ -74,13 +74,45 @@ void compRead(char *filename, cell_t **labirynt){
                         return;
                     }
                 }else if(value==path){
-                    append(&labirynt[trueval(current_height-1)][trueval(current_width)].next, trueval(current_height+1)*width+trueval(current_width));
-                    append(&labirynt[trueval(current_height+1)][trueval(current_width)].next, trueval(current_height-1)*width+trueval(current_width)); 
+                    if(labirynt[trueval(current_height-1)][trueval(current_width)].next==NULL){
+                        cell_t *temp=malloc(sizeof(cell_t));
+                        temp->numer=trueval(current_height+1)*width+trueval(current_width);
+                        temp->next=NULL;
+                        labirynt[trueval(current_height-1)][trueval(current_width)].next=temp;
+                    } else
+                    {
+                        append(&labirynt[trueval(current_height-1)][trueval(current_width)].next, trueval(current_height+1)*width+trueval(current_width));
+                    }
+                    if(labirynt[trueval(current_height+1)][trueval(current_width)].next==NULL){
+                        cell_t *temp=malloc(sizeof(cell_t));
+                        temp->numer=trueval(current_height-1)*width+trueval(current_width);
+                        temp->next=NULL;
+                        labirynt[trueval(current_height+1)][trueval(current_width)].next=temp;
+                    } else
+                    {
+                        append(&labirynt[trueval(current_height+1)][trueval(current_width)].next, trueval(current_height-1)*width+trueval(current_width)); 
+                    }
                 } //up down pass
             }else if(current_width%2==0){
                 if(value==path){
-                    append(&labirynt[trueval(current_height)][trueval(current_width+1)].next, trueval(current_height)*width+trueval(current_width+1));
-                    append(&labirynt[trueval(current_height)][trueval(current_width-1)].next, trueval(current_height)*width+trueval(current_width-1));
+                    if(labirynt[trueval(current_height)][trueval(current_width+1)].next==NULL){
+                        cell_t *temp=malloc(sizeof(cell_t));
+                        temp->numer=trueval(current_height)*width+trueval(current_width-1);
+                        temp->next=NULL;
+                        labirynt[trueval(current_height)][trueval(current_width+1)].next=temp;
+                    } else
+                    {
+                        append(&labirynt[trueval(current_height)][trueval(current_width+1)].next, trueval(current_height)*width+trueval(current_width-1));
+                    }
+                    if(labirynt[trueval(current_height)][trueval(current_width-1)].next==NULL){
+                        cell_t *temp=malloc(sizeof(cell_t));
+                        temp->numer=trueval(current_height)*width+trueval(current_width+1);
+                        temp->next=NULL;
+                        labirynt[trueval(current_height)][trueval(current_width-1)].next=temp;
+                    } else
+                    {
+                        append(&labirynt[trueval(current_height)][trueval(current_width-1)].next, trueval(current_height)*width+trueval(current_width+1));
+                    }
                 }
             } //left right passfor(int i=0;i<height;i++){
             else if(value!=path){
