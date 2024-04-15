@@ -36,6 +36,11 @@ cell_t **StdRead(char *filename, cell_t **labirynt){//działa
     labirynt=malloc(height*sizeof(cell_t*));
     for(int i=0;i<height;i++){
         labirynt[i]=malloc(width*sizeof(cell_t));
+        if(labirynt[i]==NULL){
+            errorcomm(1);
+            return NULL;
+        }
+
     }
     for(int i=0;i<height;i++){
         for(int j=0;j<width;j++){

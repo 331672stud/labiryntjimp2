@@ -3,11 +3,17 @@
 #include <stdlib.h>
 #include "graphWriter.h"
 #include "valconvert.h"
+#include "Errormsg.h"
+
 
 void findbranch(cell_t **labirynt, int width, int height, int start, char *resultname){
     int startheight=start/width;
     int startwidth=start%width;
     cell_t *branch=malloc(sizeof(cell_t));
+    if(branch==NULL){
+        errorcomm(1);
+        return;
+    }
     branch=&labirynt[startheight][startwidth];
     cell_t *branchstarts=branch->next;
     int numerkomorki;
