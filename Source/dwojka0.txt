@@ -1,6 +1,0 @@
-START
-GO !
-GO v
-GO !
-GO >
-STOP
