@@ -13,7 +13,7 @@ int main(int argc, char **argv){
 	char *resultname=malloc(64);
 	int isHelp = 0;
 	parsearg(argc, argv, optstring, &filename, &resultname, &isHelp); //getopt.h (getopt), assigns last two
-	if(isHelp = 1){
+	if(isHelp == 1){
 		return EXIT_SUCCESS;
 	}
 	cell_t **labirynt;
@@ -51,5 +51,5 @@ int main(int argc, char **argv){
 		fclose(metadata);
 	}
 	divide(labirynt, resultname, height, width, pocz);
-	return 0;
+	return EXIT_SUCCESS;
 }
