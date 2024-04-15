@@ -6,7 +6,7 @@
 
 
 
-void parsearg(int argc, char **argv, char *optstring, char **filename, char **resultname){
+void parsearg(int argc, char **argv, char *optstring, char **filename, char **resultname, int isHelp){
     int opt;
     while((opt = getopt(argc, argv, optstring)) != -1){
         switch(opt){
@@ -23,8 +23,11 @@ void parsearg(int argc, char **argv, char *optstring, char **filename, char **re
                 *resultname = optarg;
                 break;
             case 'h':
+                isHelp = 1;
                 printf("\n");
-                printf("Sposób użycia: solver -t [nazwa pliku z labiryntem] -n [nazwa plików wyjściowych preprocessora] -f [nazwa plików wyjściowych preprocessora] -w [nazwa pliku wyjściowego programu]\n\n");
+                printf("Sposób użycia: Preprocessor -t [nazwa pliku z labiryntem] -n [nazwa plików wyjściowych preprocessora]\n\n");
+                printf("A następnie:\n\n");
+                printf("Solver -f [nazwa plików wyjściowych preprocessora] -w [nazwa pliku wyjściowego programu]\n\n");
                 printf("-t: Nazwa pliku wejściowego:\n");
                 printf("    - Plik wejściowy może być tylko w formacie [nazwa].txt lub [nazwa].bin.\n");
                 printf("    - Plik wejściowy musi znajdować się w folderze Source.\n");
