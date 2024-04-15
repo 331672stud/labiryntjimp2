@@ -20,7 +20,6 @@ int main(int argc, char **argv){
 	int height, width, pocz, kon;
 	FILE *metadata=fopen("metadata.txt", "r");
 	cell_t *temp = malloc(sizeof(cell_t));
-	temp = NULL;
 
 	if(metadata==NULL){
 		printf("brak pliku");	
@@ -30,7 +29,7 @@ int main(int argc, char **argv){
 	{
 		fscanf(metadata, "%d %d %d %d", &height, &width, &pocz, &kon);
 		fclose(metadata);
-		temp=&labirynt[pocz/width][pocz%width];
+		//temp=&labirynt[pocz/width][pocz%width];
 	}
 	int firstcount=0;
 	while(temp!=NULL){
@@ -47,6 +46,6 @@ int main(int argc, char **argv){
 		fprintf(metadata, " %d", firstcount);
 		fclose(metadata);
 	}
-	divide(labirynt, resultname, height, width, pocz);
+	//divide(labirynt, resultname, height, width, pocz);
 	return 0;
 }
