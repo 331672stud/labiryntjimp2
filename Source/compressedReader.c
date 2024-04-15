@@ -79,8 +79,8 @@ void compRead(char *filename, cell_t **labirynt){
                 } //up down pass
             }else if(current_width%2==0){
                 if(value==path){
-                    append(&labirynt[trueval(current_height)][trueval(current_width-1)].next, trueval(current_height)*width+trueval(current_width+1));
-                    append(&labirynt[trueval(current_height)][trueval(current_width+1)].next, trueval(current_height)*width+trueval(current_width-1));
+                    append(&labirynt[trueval(current_height)][trueval(current_width+1)].next, trueval(current_height)*width+trueval(current_width+1));
+                    append(&labirynt[trueval(current_height)][trueval(current_width-1)].next, trueval(current_height)*width+trueval(current_width-1));
                 }
             } //left right passfor(int i=0;i<height;i++){
             else if(value!=path){
@@ -105,7 +105,7 @@ void compRead(char *filename, cell_t **labirynt){
 		    for(int j=0;j<width;j++){
 			    temp=&labirynt[i][j];
 			    while(temp!=NULL){
-				    printf("%d",temp->numer);
+				    printf("%d ",temp->numer);
 				    temp=temp->next;
 			    }
 			    printf("\n");

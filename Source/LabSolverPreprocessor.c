@@ -29,7 +29,7 @@ int main(int argc, char **argv){
 	{
 		fscanf(metadata, "%d %d %d %d", &height, &width, &pocz, &kon);
 		fclose(metadata);
-		//temp=&labirynt[pocz/width][pocz%width];
+		temp=&labirynt[pocz/width][pocz%width];
 	}
 	int firstcount=0;
 	while(temp!=NULL){
@@ -46,6 +46,19 @@ int main(int argc, char **argv){
 		fprintf(metadata, " %d", firstcount);
 		fclose(metadata);
 	}
-	//divide(labirynt, resultname, height, width, pocz);
+    if(temp!=NULL){
+        for(int i=0;i<height;i++){
+        printf("\n");
+            for(int j=0;j<width;j++){
+                printf("\n");
+                temp=&labirynt[i][j];
+                while(temp!=NULL){
+                    printf("%d ", temp->numer);
+                    temp=temp->next;
+                }
+            }
+        }
+    }
+	divide(labirynt, resultname, height, width, pocz);
 	return 0;
 }

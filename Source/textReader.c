@@ -107,23 +107,9 @@ cell_t **StdRead(char *filename, cell_t **labirynt){//działa
             }
         }
     }
-    //conv2graph(labirynt, width, height, numerstart);
+    conv2graph(labirynt, width, height, numerstart);
     FILE *metadata=fopen("metadata.txt", "w");
     fprintf(metadata, "%d %d %d %d", height, width, numerstart, numerkoniec);
     fclose(metadata);
-    cell_t *temp=malloc(sizeof(cell_t));
-    if(temp!=NULL){
-        for(int i=0;i<height;i++){
-        printf("\n");
-            for(int j=0;j<width;j++){
-                printf("\n");
-                temp=&labirynt[i][j];
-                while(temp!=NULL){
-                    printf("%d ", temp->numer);
-                    temp=temp->next;
-                }
-            }
-        }
-    }
     return labirynt;
 }
