@@ -1,6 +1,5 @@
 #include "FileList.h"
-#include <stdint.h>
-void Listappend( list_t **list, int nrkom, uint8_t nrpliku)
+void Listappend( list_t **list, int nrkom, int nrpliku)
 {
     list_t *new=malloc(sizeof(list_t));
     new->nrkom = nrkom;

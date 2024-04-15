@@ -1,12 +1,11 @@
 #include "adjacencyMatrix.h"
-#include <stdint.h>
 #include "FileList.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-uint8_t countnext(char *filename){ //zwraca liczbe plikow wychodzacych z branch
-    uint8_t count;
+int countnext(char *filename){ //zwraca liczbe plikow wychodzacych z branch
+    int count;
     FILE *plik=fopen(filename, "r");
     int komorka;
     char flag;
@@ -60,9 +59,9 @@ bool isEnd(list_t *lista, int kon, char *filename){ //sprawdza czy w ostatnim pl
     return false;
 }
 
-void recursiveRead(int pocz, int kon, uint8_t ilep0, char *filename, list_t *lista, char *zapis){
+void recursiveRead(int pocz, int kon, int ilep0, char *filename, list_t *lista, char *zapis){
     char *resultname = malloc(64);
-    uint8_t branchcount;
+    int branchcount;
     bool czydoprintu;
     if(ilep0==0){
         Listappend(&lista, pocz, ilep0);
@@ -74,7 +73,7 @@ void recursiveRead(int pocz, int kon, uint8_t ilep0, char *filename, list_t *lis
         else{
             czydoprintu=isEnd(lista, kon, filename);
             if(czydoprintu)
-                printList(lista, kon, resultname, zapis);
+                writePath(lista, kon, resultname, zapis);
         }
     } else for(int i=0;i<ilep0;i++){
         Listappend(&lista, pocz, i);
@@ -86,13 +85,13 @@ void recursiveRead(int pocz, int kon, uint8_t ilep0, char *filename, list_t *lis
         else{
             czydoprintu=isEnd(lista, kon, filename);
             if(czydoprintu)
-                printList(lista, kon, resultname ,zapis);
+                writePath(lista, kon, resultname ,zapis);
         }
         deappend(&lista);
     }
 }
 
-void convRead(int pocz, int kon, uint8_t ilep0, char *filename, char *zapis){
+void convRead(int pocz, int kon, int ilep0, char *filename, char *zapis){
     list_t *lista=malloc(sizeof(list_t));
     recursiveRead(pocz, kon, ilep0, filename, lista, zapis);
     
