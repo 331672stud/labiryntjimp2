@@ -33,7 +33,7 @@ int main(int argc, char **argv){
 	{
 		fscanf(metadata, "%d %d %d %d", &height, &width, &pocz, &kon);
 		fclose(metadata);
-		temp=&labirynt[pocz/width][pocz%width];
+		temp=labirynt[pocz/width][pocz%width].next;
 	}
 	int firstcount=0;
 	while(temp!=NULL){

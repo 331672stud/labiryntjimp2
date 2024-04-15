@@ -5,21 +5,22 @@
 #include <stdio.h>
 #include "writer.h"
 
-int countnext(char *filename){ //zwraca liczbe plikow wychodzacych z branch
-    int count;
-    FILE *plik=fopen(filename, "r");
+int countnext(char *resultname){ //zwraca liczbe plikow wychodzacych z branch
+    FILE *plik=fopen(resultname, "r");
+    if(plik==NULL)
+        return 0;
     int komorka;
     char flag;
-    fscanf(plik, "%c", &flag);
     while(flag!='_')
-        fscanf(plik, "%d %c", &komorka, &flag);
-    fscanf(plik, "%d", &count);
+        fscanf(plik, "%c %d", &flag, &komorka);
     fclose(plik);
-    return count;
+    return komorka;
 }
 
-int lastcell(char *filename){ //zwraca ostatnia komorke w pliku
-    FILE *plik=fopen(filename, "r");
+int lastcell(char *resultname){ //zwraca ostatnia komorke w pliku
+    FILE *plik=fopen(resultname, "r");
+    if(plik==NULL)
+        return 0;
     int komorka;
     char flag;
     fscanf(plik, "%c", &flag);
@@ -61,16 +62,12 @@ bool isEnd(list_t *lista, int kon, char *filename){ //sprawdza czy w ostatnim pl
 }
 
 void recursiveRead(int pocz, int kon, int ilep0, char *filename, list_t *lista, char *zapis){
-    if(lista==NULL)
-        lista=malloc(sizeof(list_t));
     char *resultname = malloc(64);
     int branchcount;
     bool czydoprintu;
+    list_t *kopia=lista;
     if(ilep0==0){
-        if(lista->nrkom==-1){
-            lista->nrpliku-ilep0;
-            lista->nrkom=pocz;
-        }else Listappend(&lista, pocz, ilep0);
+        Listappend(&lista, pocz, ilep0);
         snprintf(resultname, 64, "%s%d_%d.txt", filename, pocz, ilep0);
         branchcount=countnext(resultname);
         if(branchcount!=0){
@@ -79,15 +76,10 @@ void recursiveRead(int pocz, int kon, int ilep0, char *filename, list_t *lista, 
         else{
             czydoprintu=isEnd(lista, kon, filename);
             if(czydoprintu)
-                writePath(lista, kon, resultname, zapis);
+                writePath(lista, kon, filename, zapis);
         }
     } else for(int i=0;i<ilep0;i++){
-        if(lista==NULL)
-            lista=malloc(sizeof(list_t));
-        if(lista->nrkom==-1){
-            lista->nrpliku-ilep0;
-            lista->nrkom=pocz;
-        }Listappend(&lista, pocz, i);
+        Listappend(&lista, pocz, i);
         snprintf(resultname, 64, "%s%d_%d.txt", filename, pocz, i);
         branchcount=countnext(resultname);
         if(branchcount!=0){
@@ -96,18 +88,13 @@ void recursiveRead(int pocz, int kon, int ilep0, char *filename, list_t *lista, 
         else{
             czydoprintu=isEnd(lista, kon, filename);
             if(czydoprintu)
-                writePath(lista, kon, resultname ,zapis);
+                writePath(lista, kon, filename ,zapis);
         }
-        if(lista->next==NULL){
-            lista->nrkom=-1;
-        }else deappend(&lista);
+        lista=kopia;
     }
 }
 
 void convRead(int pocz, int kon, int ilep0, char *filename, char *zapis){
-    list_t *lista=malloc(sizeof(list_t));
-    lista->nrkom=-1;
-    lista->next=NULL;
-    recursiveRead(pocz, kon, ilep0, filename, lista, zapis);
-    
+    list_t *lista=NULL;
+    recursiveRead(pocz, kon, ilep0, filename, lista, zapis);    
 }

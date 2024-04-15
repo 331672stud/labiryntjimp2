@@ -19,7 +19,7 @@ char returndir(int roznica){
         } else if(roznica<-1){
             return 'v';
         }else{
-            printf("\n ERROR roznica komorek 0 \n");
+            printf("\n ERROR roznica komorek %d \n", roznica);
             return '!';
         }
         break;
@@ -32,8 +32,10 @@ void writePath(list_t *lista, int kon, char *resultname, char *zapis){
     snprintf(filename, 64, "%s%d.txt", zapis, nrsciezki);
     nrsciezki++;
     FILE *plik_wyn=fopen(filename, "w");
-    if(plik_wyn==NULL)
-        printf("nie udalo sie otworzyc pliku");
+    if(plik_wyn==NULL){
+        printf("nie udalo sie otworzyc pliku wynikowego");
+        return;
+    }
     int nrkom;
     char flag;
     int nrkoml;
@@ -43,8 +45,10 @@ void writePath(list_t *lista, int kon, char *resultname, char *zapis){
     while(lista!=NULL){
         snprintf(filename, 64, "%s%d_%d.txt", resultname, lista->nrkom, lista->nrpliku);
         FILE *plik_read=fopen(filename, "r");
-        if(plik_read==NULL)
-            printf("nie udalo sie otworzyc pliku");
+        if(plik_read==NULL){
+            printf("nie udalo sie otworzyc pliku read %s", filename);
+            return;    
+        }
         fscanf(plik_read, "%c %d", &flag, &nrkom);
         czyrun=0;
         while(flag!='_' && czyrun==0)
