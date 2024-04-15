@@ -10,11 +10,14 @@ void Listappend( list_t **list, int nrkom, int nrpliku)
         *list = new;
         return;
     }
-    else{
-    while (last->next != NULL) {
-        last = last->next;
+    else
+    {
+        if(last!=NULL)
+            while (last->next != NULL) {
+                last = last->next;
+            }
+        last->next = new;
     }
-    last->next = new;}
 }
 
 void deappend( list_t **list)

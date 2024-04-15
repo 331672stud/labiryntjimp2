@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "writer.h"
 
 int countnext(char *filename){ //zwraca liczbe plikow wychodzacych z branch
     int count;
@@ -60,11 +61,16 @@ bool isEnd(list_t *lista, int kon, char *filename){ //sprawdza czy w ostatnim pl
 }
 
 void recursiveRead(int pocz, int kon, int ilep0, char *filename, list_t *lista, char *zapis){
+    if(lista==NULL)
+        lista=malloc(sizeof(list_t));
     char *resultname = malloc(64);
     int branchcount;
     bool czydoprintu;
     if(ilep0==0){
-        Listappend(&lista, pocz, ilep0);
+        if(lista->nrkom==-1){
+            lista->nrpliku-ilep0;
+            lista->nrkom=pocz;
+        }else Listappend(&lista, pocz, ilep0);
         snprintf(resultname, 64, "%s%d_%d.txt", filename, pocz, ilep0);
         branchcount=countnext(resultname);
         if(branchcount!=0){
@@ -76,7 +82,12 @@ void recursiveRead(int pocz, int kon, int ilep0, char *filename, list_t *lista, 
                 writePath(lista, kon, resultname, zapis);
         }
     } else for(int i=0;i<ilep0;i++){
-        Listappend(&lista, pocz, i);
+        if(lista==NULL)
+            lista=malloc(sizeof(list_t));
+        if(lista->nrkom==-1){
+            lista->nrpliku-ilep0;
+            lista->nrkom=pocz;
+        }Listappend(&lista, pocz, i);
         snprintf(resultname, 64, "%s%d_%d.txt", filename, pocz, i);
         branchcount=countnext(resultname);
         if(branchcount!=0){
@@ -87,12 +98,16 @@ void recursiveRead(int pocz, int kon, int ilep0, char *filename, list_t *lista, 
             if(czydoprintu)
                 writePath(lista, kon, resultname ,zapis);
         }
-        deappend(&lista);
+        if(lista->next==NULL){
+            lista->nrkom=-1;
+        }else deappend(&lista);
     }
 }
 
 void convRead(int pocz, int kon, int ilep0, char *filename, char *zapis){
     list_t *lista=malloc(sizeof(list_t));
+    lista->nrkom=-1;
+    lista->next=NULL;
     recursiveRead(pocz, kon, ilep0, filename, lista, zapis);
     
 }
