@@ -23,7 +23,7 @@ void parsearg(int argc, char **argv, char *optstring, char **filename, char **re
                 *resultname = optarg;
                 break;
             case 'h':
-                isHelp = 1;
+                *isHelp = 1;
                 printf("\n");
                 printf("Sposób użycia: Preprocessor -t [nazwa pliku z labiryntem] -n [nazwa plików wyjściowych preprocessora]\n\n");
                 printf("A następnie:\n\n");
