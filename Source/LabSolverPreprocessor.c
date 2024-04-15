@@ -46,28 +46,6 @@ int main(int argc, char **argv){
 		fprintf(metadata, " %d", firstcount);
 		fclose(metadata);
 	}
-    for(int i=0;i<height;i++){
-        printf("\n");
-        for(int j=0;j<width;j++){
-            printf("\n");
-            temp=&labirynt[i][j];
-            while(temp!=NULL){
-                printf("%d ", temp->numer);
-                temp=temp->next;
-            }
-        }
-    }
 	divide(labirynt, resultname, height, width, pocz);
-	    for(int i=0;i<height;i++){
-        printf("\n");
-        for(int j=0;j<width;j++){
-            printf("\n");
-            temp=&labirynt[i][j];
-            while(temp!=NULL){
-                printf("%d ", temp->numer);
-                temp=temp->next;
-            }
-        }
-    }
 	return 0;
 }
