@@ -6,7 +6,7 @@
 #include "FileList.h"
 #include "writer.h"
 #include "adjacencyMatrix.h"
-#define optstring ":f:w:h:" //f-przedrostek plików w-plik wynikowy, h help
+#define optstring "f:w:h" //f-przedrostek plików w-plik wynikowy, h help
 
 int main(int argc, char **argv){
 	char *filename=malloc(16);
