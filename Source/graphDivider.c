@@ -33,7 +33,7 @@ void findbranch(cell_t **labirynt, int width, int height, int start, char *resul
             PartWrite(branch->numer, numerpliku, branch, resultname, 0);  
         }
         else{
-            int ileplikow=0;
+            int ileplikow=-1;
             cell_t *temp=labirynt[numerkomorki/width][numerkomorki%width].next;
             while(temp!=NULL){
                 ileplikow++;

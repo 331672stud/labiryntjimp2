@@ -61,40 +61,34 @@ bool isEnd(list_t *lista, int kon, char *filename){ //sprawdza czy w ostatnim pl
     return false;
 }
 
-void recursiveRead(int pocz, int kon, int ilep0, char *filename, list_t *lista, char *zapis){
+void recursiveRead(int pocz, int kon, int curnum, char *filename, list_t *lista, char *zapis){
     char *resultname = malloc(64);
     int branchcount;
     bool czydoprintu;
+    Listappend(&lista, pocz, curnum);
+    snprintf(resultname, 64, "%s%d_%d.txt", filename, pocz, curnum);
     list_t *kopia=lista;
-    if(ilep0==0){
-        Listappend(&lista, pocz, ilep0);
-        snprintf(resultname, 64, "%s%d_%d.txt", filename, pocz, ilep0);
-        branchcount=countnext(resultname);
-        if(branchcount!=0){
-            recursiveRead(lastcell(resultname), kon, branchcount, filename, lista, zapis);
+    branchcount=countnext(resultname);
+    if(branchcount!=0){
+        for(int i=0;i<=branchcount;i++)
+        {
+            recursiveRead(lastcell(resultname), kon, i, filename, lista, zapis);
+            lista=kopia;
         }
-        else{
-            czydoprintu=isEnd(lista, kon, filename);
-            if(czydoprintu)
-                writePath(lista, kon, filename, zapis);
-        }
-    } else for(int i=0;i<ilep0;i++){
-        Listappend(&lista, pocz, i);
-        snprintf(resultname, 64, "%s%d_%d.txt", filename, pocz, i);
-        branchcount=countnext(resultname);
-        if(branchcount!=0){
-            recursiveRead(lastcell(resultname), kon, branchcount, filename, lista, zapis);
-        }
-        else{
-            czydoprintu=isEnd(lista, kon, filename);
-            if(czydoprintu)
-                writePath(lista, kon, filename ,zapis);
-        }
-        lista=kopia;
+    }
+    else
+    {
+        czydoprintu=isEnd(lista, kon, filename);
+        if(czydoprintu)
+            writePath(lista, kon, filename ,zapis);
     }
 }
 
 void convRead(int pocz, int kon, int ilep0, char *filename, char *zapis){
-    list_t *lista=NULL;
-    recursiveRead(pocz, kon, ilep0, filename, lista, zapis);    
+    list_t *lista=malloc(sizeof(list_t));
+    for(int i=0;i<=ilep0;i++)
+    {
+        lista=NULL;
+        recursiveRead(pocz, kon, i, filename, lista, zapis);
+    } 
 }

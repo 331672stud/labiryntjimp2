@@ -35,7 +35,7 @@ int main(int argc, char **argv){
 		fclose(metadata);
 		temp=labirynt[pocz/width][pocz%width].next;
 	}
-	int firstcount=0;
+	int firstcount=-1;
 	while(temp!=NULL){
 		firstcount++;
 		temp=temp->next;
