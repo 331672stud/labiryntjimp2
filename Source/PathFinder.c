@@ -65,22 +65,22 @@ void recursiveRead(int pocz, int kon, int curnum, char *filename, list_t *lista,
     char *resultname = malloc(64);
     int branchcount;
     bool czydoprintu;
-    Listappend(&lista, pocz, curnum);
     snprintf(resultname, 64, "%s%d_%d.txt", filename, pocz, curnum);
-    list_t *kopia=lista;
     branchcount=countnext(resultname);
     if(branchcount!=0){
         for(int i=0;i<=branchcount;i++)
         {
+            Listappend(&lista, pocz, curnum);
             recursiveRead(lastcell(resultname), kon, i, filename, lista, zapis);
-            lista=kopia;
         }
     }
     else
     {
         czydoprintu=isEnd(lista, kon, filename);
-        if(czydoprintu)
-            writePath(lista, kon, filename ,zapis);
+        if(czydoprintu){
+            Listappend(&lista, pocz, curnum);
+            writePath(lista, kon, filename, zapis);
+            }
     }
 }
 

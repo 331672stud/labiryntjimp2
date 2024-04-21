@@ -35,6 +35,7 @@ void printfile(char *filename, FILE **wynik, int kon){
     char dir;
     int czyrun=0;
     FILE *plik_read=fopen(filename, "r");
+        printf("%s\n", filename);
     if(plik_read==NULL){
         printf("nie udalo sie otworzyc pliku read %s", filename);
         return; 
@@ -76,6 +77,7 @@ void writePath(list_t *lista, int kon, char *resultname, char *zapis){
         return;
     }
     fprintf(plik_wyn, "START\n");
+    printf("\nplik\n");
     while(lista!=NULL){
         snprintf(filename, 64, "%s%d_%d.txt", resultname, lista->nrkom, lista->nrpliku);
         printfile(filename, &plik_wyn, kon);      
